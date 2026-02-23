@@ -65,7 +65,7 @@ export class AudioEngine {
                 "D3": "d2-3.wav",
                 "E3": "e2-3.wav"
             },
-            baseUrl: "/samples/bass/mybass/samples/",
+            baseUrl: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/samples/bass/mybass/samples/`,
             volume: 12, // Boosted volume further
         }).connect(this.bassEQ);
 
