@@ -15,7 +15,6 @@ interface AppState {
     };
     reverbWet: number;
     loopCount: number; // Number of times to repeat the song. 0 means loop forever.
-    tempoChangePerLoop: number; // BPM change applied after each loop iteration (e.g. +5 to speed up gradually)
 
     // Display Settings
     fontSize: number;
@@ -53,7 +52,6 @@ interface AppState {
     setActiveBar: (bar: { sectionIndex: number; barIndex: number } | null) => void;
     setReverbWet: (wet: number) => void;
     setLoopCount: (count: number) => void;
-    setTempoChangePerLoop: (delta: number) => void;
 
     setFontSize: (size: number) => void;
     setMinorDisplay: (mode: 'minus' | 'm' | 'small') => void;
@@ -92,7 +90,6 @@ export const useAppStore = create<AppState>((set) => ({
     },
     reverbWet: 0.2, // Default 20%
     loopCount: 3, // Default repeats
-    tempoChangePerLoop: 0,
 
     // Default Settings
     fontSize: 18,
@@ -160,7 +157,6 @@ export const useAppStore = create<AppState>((set) => ({
     setActiveBar: (activeBar) => set({ activeBar }),
     setReverbWet: (reverbWet: number) => set({ reverbWet }),
     setLoopCount: (loopCount: number) => set({ loopCount }),
-    setTempoChangePerLoop: (tempoChangePerLoop: number) => set({ tempoChangePerLoop }),
 
     setFontSize: (fontSize) => set({ fontSize }),
     setMinorDisplay: (minorDisplay) => set({ minorDisplay }),

@@ -241,18 +241,9 @@ export class AudioEngine {
         });
 
         const totalIterations = loopCount === 0 ? 1 : loopCount;
-        const tempoChangePerLoop = store.tempoChangePerLoop;
         let globalBarIndex = 0;
 
         for (let iter = 0; iter < totalIterations; iter++) {
-            // Schedule BPM change at the start of each iteration
-            if (iter > 0 && tempoChangePerLoop !== 0) {
-                const iterStartBar = absoluteBarIndex;
-                Tone.Transport.schedule((time) => {
-                    Tone.Transport.bpm.value = Math.max(20, Tone.Transport.bpm.value + tempoChangePerLoop);
-                }, `${iterStartBar}:0:0`);
-            }
-
             flatBars.forEach(bar => {
                 // Fill in empty chords with the last valid chord
                 let effectiveChords = bar.chords.length > 0 ? [...bar.chords] : [lastValidChord];
