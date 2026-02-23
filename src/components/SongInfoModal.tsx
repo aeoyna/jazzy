@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Info, Save } from 'lucide-react';
+import { X, Info } from 'lucide-react';
 import { Song } from '@/types/song';
 import { useAppStore } from '@/store/useAppStore';
 import { DrumPicker } from './DrumPicker';
@@ -9,44 +9,67 @@ const COMMON_KEYS = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb',
 const TEMPOS = Array.from({ length: 261 }, (_, i) => (40 + i).toString()); // 40 to 300
 const REPEATS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '12', '15', '20', 'Infinite'];
 
+const KEY_SEMITONES: Record<string, number> = {
+    'C': 0, 'Db': 1, 'D': 2, 'Eb': 3, 'E': 4, 'F': 5,
+    'Gb': 6, 'G': 7, 'Ab': 8, 'A': 9, 'Bb': 10, 'B': 11,
+};
+
+function getSemitone(key: string): number {
+    const match = key.match(/^([A-G][b#]?)/);
+    return match ? (KEY_SEMITONES[match[1]] ?? 0) : 0;
+}
+
 interface SongInfoModalProps {
     song: Song;
     onClose: () => void;
 }
 
 export const SongInfoModal: React.FC<SongInfoModalProps> = ({ song, onClose }) => {
-    const { updateMyScore, myScores, currentSong, setSong, loopCount, setLoopCount } = useAppStore();
+    const { setTempo, setTranspose, transpose, loopCount, setLoopCount, tempo } = useAppStore();
+
+    // Compute the currently active key from the base key + current transpose
+    const baseNote = getSemitone(song.defaultKey);
+    const currentNoteIndex = ((baseNote + transpose) % 12 + 12) % 12;
+    const NOTES = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+    const initialKey = NOTES[currentNoteIndex];
 
     const [style, setStyle] = useState(song.style);
-    const [key, setKey] = useState(song.defaultKey);
-    const [tempo, setTempo] = useState(song.defaultTempo.toString());
+    const [key, setKey] = useState(COMMON_KEYS.includes(initialKey) ? initialKey : COMMON_KEYS[0]);
+    const [tempoStr, setTempoStr] = useState(tempo.toString());
     const [repeats, setRepeats] = useState<string>(loopCount === 0 ? 'Infinite' : loopCount.toString());
 
-    const handleSave = () => {
-        const parsedTempo = parseInt(tempo, 10) || 120;
-        const updates = { style, defaultKey: key, defaultTempo: parsedTempo };
+    // Key change → compute transposition in semitones from original key and apply immediately
+    const handleKeyChange = (val: string) => {
+        setKey(val);
+        const diff = getSemitone(val) - getSemitone(song.defaultKey);
+        const semitones = ((diff % 12) + 12) % 12;
+        // Use -6~+5 range for minimal transposition
+        setTranspose(semitones > 6 ? semitones - 12 : semitones);
+    };
 
-        const parsedRepeats = repeats === 'Infinite' ? 0 : parseInt(repeats, 10) || 3;
-        setLoopCount(parsedRepeats);
+    // Tempo change → apply to store immediately
+    const handleTempoChange = (val: string) => {
+        setTempoStr(val);
+        const parsed = parseInt(val, 10);
+        if (!isNaN(parsed)) setTempo(parsed);
+    };
 
-        const isMyScore = myScores.some(s => s.id === song.id);
-        if (isMyScore) {
-            updateMyScore(song.id, updates);
-        } else if (currentSong?.id === song.id) {
-            // If it's a built-in song currently playing, we temporarily update it in state
-            // Note: Ideally, modifying built-in songs should fork them to myScores, but for this quick edit we update current playing state.
-            setSong({ ...song, ...updates });
-            // And also update tempo in store directly
-            useAppStore.getState().setTempo(parsedTempo);
-        }
-
-        onClose();
+    // Repeats change → apply to store immediately
+    const handleRepeatsChange = (val: string) => {
+        setRepeats(val);
+        const parsed = val === 'Infinite' ? 0 : parseInt(val, 10) || 3;
+        setLoopCount(parsed);
     };
 
     return (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-fade-in text-white font-sans" onClick={onClose}>
-            <div className="w-full max-w-sm bg-zinc-900 border border-zinc-800 rounded-2xl shadow-2xl flex flex-col relative animate-slide-up" onClick={(e) => e.stopPropagation()}>
-
+        <div
+            className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-fade-in text-white font-sans"
+            onClick={onClose}
+        >
+            <div
+                className="w-full max-w-sm bg-zinc-900 border border-zinc-800 rounded-2xl shadow-2xl flex flex-col relative animate-slide-up"
+                onClick={(e) => e.stopPropagation()}
+            >
                 {/* Header */}
                 <header className="flex items-center justify-between px-4 py-3 border-b border-zinc-800">
                     <div className="flex items-center gap-2">
@@ -90,42 +113,35 @@ export const SongInfoModal: React.FC<SongInfoModalProps> = ({ song, onClose }) =
                         <DrumPicker
                             options={COMMON_KEYS}
                             value={COMMON_KEYS.includes(key) ? key : COMMON_KEYS[0]}
-                            onChange={(val) => setKey(val as string)}
+                            onChange={(val) => handleKeyChange(val as string)}
                             label="KEY"
                             itemHeight={34}
                             loop={true}
                         />
                         <DrumPicker
                             options={TEMPOS}
-                            value={tempo}
-                            onChange={(val) => setTempo(val as string)}
+                            value={tempoStr}
+                            onChange={(val) => handleTempoChange(val as string)}
                             label="TEMPO"
                             itemHeight={34}
                         />
                         <DrumPicker
                             options={REPEATS}
                             value={repeats}
-                            onChange={(val) => setRepeats(val as string)}
+                            onChange={(val) => handleRepeatsChange(val as string)}
                             label="REPEATS"
                             itemHeight={34}
                         />
                     </div>
                 </div>
 
-                {/* Action Footer */}
-                <div className="p-4 border-t border-zinc-800 flex justify-end gap-3">
+                {/* Footer */}
+                <div className="p-4 border-t border-zinc-800 flex justify-end">
                     <button
                         onClick={onClose}
-                        className="px-4 py-2 text-zinc-400 hover:text-white font-medium transition-colors text-sm"
+                        className="px-6 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded-lg font-bold transition-colors text-sm"
                     >
-                        キャンセル
-                    </button>
-                    <button
-                        onClick={handleSave}
-                        className="px-6 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded-lg font-bold transition-colors text-sm flex items-center gap-1"
-                    >
-                        <Save size={16} />
-                        完了
+                        閉じる
                     </button>
                 </div>
             </div>

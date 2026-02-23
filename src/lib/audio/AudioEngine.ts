@@ -189,7 +189,7 @@ export class AudioEngine {
         const loopCount = store.loopCount;
 
         this.stop();
-        Tone.Transport.bpm.value = song.defaultTempo;
+        Tone.Transport.bpm.value = store.tempo;
 
         // Schedule events
         // We need to flatten the song structure into a timeline
