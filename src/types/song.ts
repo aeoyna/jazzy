@@ -11,6 +11,7 @@ export interface Chord {
 
 export interface Bar {
     chords: string[]; // Simplification for MVP: just string representation ["Cm7", "F7"]
+    lyrics?: string; // e.g., "The au-tumn", "leaves"
     timeSignature?: TimeSignature; // Only if changed
     repeatStart?: boolean;
     repeatEnd?: number; // number of times to repeat
@@ -26,6 +27,7 @@ export interface Song {
     id: string;
     title: string;
     composer: string;
+    arranger?: string;
     style: string; // "Swing", "Bossa", "Ballad"
     defaultKey: KeySignature;
     defaultTempo: number;

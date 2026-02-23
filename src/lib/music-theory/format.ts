@@ -20,7 +20,8 @@ export function transposeNote(note: string, semitones: number): string {
     let newIdx = (idx + semitones) % 12;
     if (newIdx < 0) newIdx += 12;
 
-    return NOTE_NAMES[newIdx];
+    const transposed = NOTE_NAMES[newIdx];
+    return transposed.replace(/b/g, '♭');
 }
 
 export interface FormatSettings {
@@ -29,24 +30,34 @@ export interface FormatSettings {
     useGermanB: boolean;
 }
 
-export function formatChord(chordSymbol: string, settings: FormatSettings): { root: string, quality: string, extension: string } {
-    // 1. Parse Chord
-    const match = chordSymbol.match(/^([A-G][#b]?)(.*)$/);
-    if (!match) return { root: chordSymbol, quality: '', extension: '' };
+export function formatChord(chordSymbol: string, settings: FormatSettings): { root: string, bass: string, superscript: string, subscript: string } {
+    // 1. Parse Chord (Handle slash chords first)
+    const [mainChord, bassNote] = chordSymbol.split('/');
 
-    let root = match[1];
+    const match = mainChord.match(/^([A-G][#b]?)(.*)$/);
+    // If we can't parse it, just return the whole string as the root
+    if (!match) return { root: chordSymbol, bass: '', superscript: '', subscript: '' };
+
+    let root = match[1].replace(/b/g, '♭');
     let remainder = match[2];
 
-    // 2. Transpose Root
+    let bass = '';
+    if (bassNote) {
+        bass = bassNote.replace(/b/g, '♭');
+    }
+
+    // 2. Transpose Root and Bass
     if (settings.transpose !== 0) {
         root = transposeNote(root, settings.transpose);
+        if (bass) {
+            bass = transposeNote(bass, settings.transpose);
+        }
     }
 
     // 3. Handle German B (H for B only, Bb stays Bb)
     if (settings.useGermanB) {
-        if (root === 'B') {
-            root = 'H';
-        }
+        if (root === 'B') root = 'H';
+        if (bass === 'B') bass = 'H';
     }
 
     // 4. Parse Quality/Extension for Minor Display
@@ -57,13 +68,6 @@ export function formatChord(chordSymbol: string, settings: FormatSettings): { ro
     let displayQuality = remainder;
 
     // Check if it is minor
-    // Identifiers: 'm', '-'
-    // We want to normalize to the setting.
-
-    // Simple replacement strategy:
-    // If it starts with 'm' (and not maj) or '-'
-    // Replace that leading marker with the setting.
-
     let isMinor = false;
     let suffix = remainder;
 
@@ -75,24 +79,40 @@ export function formatChord(chordSymbol: string, settings: FormatSettings): { ro
         suffix = remainder.substring(1);
     }
 
+    // Replace 'maj' with '△' and 'b' with '♭'
+    suffix = suffix.replace(/maj/g, '△').replace(/b/g, '♭');
+
+    let superscript = '';
+    let subscript = '';
+
+    // Typical iReal format:
+    // Minor symbol is subscript (if setting dictates, or just regular if '-')
+    // Numbers (7, 9, 11, 13) and alterations (b5, #9) are superscript
+    // 'dim'/'o', 'aug'/'+', 'alt' are superscript
+
+    // For simplicity in this view:
+    // If it's minor, the 'm' or '-' is the subscript, and the REST is superscript.
+    // If it's major/dominant, everything goes to superscript.
+    // Except half-diminished (m7b5) usually has 'm' subscript, '7b5' superscript. (or Ø superscript)
+
     if (isMinor) {
-        let minorMark = '';
         switch (settings.minorDisplay) {
-            case 'minus': minorMark = '-'; break;
-            case 'm': minorMark = 'm'; break;
-            case 'small': minorMark = 'm'; break; // We'll handle visual "small" in CSS if needed, or just return text 'm'
+            case 'minus': subscript = '-'; break;
+            case 'm': subscript = 'm'; break;
+            case 'small': subscript = 'm'; break;
         }
-        displayQuality = minorMark + suffix;
+        superscript = suffix;
+    } else {
+        // Not minor. 
+        // Example: '△7', '7b9', '13', 'sus4' -> all superscript
+        superscript = suffix;
     }
 
-    // For "Small (m)", the consumer (ChordCell) might render the 'm' with a specific abstract class?
-    // formatChord returns a string, but maybe we need structured output?
-    // Let's return structured output: { root, quality }
-
-    return { root, quality: displayQuality, extension: '' };
+    return { root, bass, superscript, subscript };
 }
 
 export function formatChordString(chordSymbol: string, settings: FormatSettings): string {
-    const { root, quality } = formatChord(chordSymbol, settings);
-    return root + quality;
+    const { root, bass, superscript, subscript } = formatChord(chordSymbol, settings);
+    const bassPart = bass ? `/${bass}` : '';
+    return `${root}${subscript}${superscript}${bassPart}`;
 }

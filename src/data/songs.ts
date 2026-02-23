@@ -11,14 +11,14 @@ export const autumnLeaves: Song = {
         {
             label: 'A',
             bars: [
-                { chords: ['Cm7'], repeatStart: true },
-                { chords: ['F7'] },
-                { chords: ['Bbmaj7'] },
-                { chords: ['Ebmaj7'] },
-                { chords: ['Am7b5'] },
-                { chords: ['D7b9'] },
-                { chords: ['Gm6'] },
-                { chords: ['Gm6'], repeatEnd: 2 },
+                { chords: ['Cm7'], repeatStart: true, lyrics: 'The au-tumn / Since you' },
+                { chords: ['F7'], lyrics: 'leaves / went' },
+                { chords: ['Bbmaj7'], lyrics: 'drift by my / a-way the' },
+                { chords: ['Ebmaj7'], lyrics: 'win-dow / days grow' },
+                { chords: ['Am7b5'], lyrics: 'The au-tumn / long, And' },
+                { chords: ['D7b9'], lyrics: 'leaves / soon Ill' },
+                { chords: ['Gm6'], lyrics: 'of red and / hear old' },
+                { chords: ['Gm6'], repeatEnd: 2, lyrics: 'gold / win-ters' },
             ],
         },
         {
@@ -79,4 +79,67 @@ export const blueBossa: Song = {
     ]
 };
 
-export const songLibrary: Song[] = [autumnLeaves, blueBossa];
+export const sunnySide: Song = {
+    id: 'sunny-side',
+    title: 'On the Sunny Side of the Street',
+    composer: 'Jimmy McHugh',
+    style: 'Swing',
+    defaultKey: 'C',
+    defaultTempo: 120,
+    sections: [
+        {
+            label: 'A1',
+            bars: [
+                { chords: ['Cmaj7'] },
+                { chords: ['E7'] },
+                { chords: ['Fmaj7'] },
+                { chords: ['G7'] },
+                { chords: ['Cmaj7', 'Am7'] },
+                { chords: ['Dm7', 'G7'] },
+                { chords: ['Cmaj7', 'Am7'] },
+                { chords: ['Dm7', 'G7'] },
+            ],
+        },
+        {
+            label: 'A2',
+            bars: [
+                { chords: ['Cmaj7'] },
+                { chords: ['E7'] },
+                { chords: ['Fmaj7'] },
+                { chords: ['G7'] },
+                { chords: ['Cmaj7', 'Am7'] },
+                { chords: ['Dm7', 'G7'] },
+                { chords: ['Cmaj7'] },
+                { chords: ['Gm7', 'C7'] },
+            ],
+        },
+        {
+            label: 'B',
+            bars: [
+                { chords: ['Fmaj7'] },
+                { chords: ['Fmaj7'] },
+                { chords: ['Cmaj7'] },
+                { chords: ['Cmaj7'] },
+                { chords: ['D7'] },
+                { chords: ['D7'] },
+                { chords: ['Dm7'] },
+                { chords: ['G7'] },
+            ],
+        },
+        {
+            label: 'A3',
+            bars: [
+                { chords: ['Cmaj7'] },
+                { chords: ['E7'] },
+                { chords: ['Fmaj7'] },
+                { chords: ['G7'] },
+                { chords: ['Cmaj7', 'Am7'] },
+                { chords: ['Dm7', 'G7'] },
+                { chords: ['Cmaj7'] },
+                { chords: ['Cmaj7'] },
+            ],
+        }
+    ]
+};
+
+export const songLibrary: Song[] = [autumnLeaves, blueBossa, sunnySide];

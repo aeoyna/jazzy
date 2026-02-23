@@ -1,12 +1,13 @@
 import React from 'react';
 import { Song, Section } from '@/types/song';
 import { ChordCell } from './ChordCell';
+import { useAppStore } from '@/store/useAppStore';
 
 interface ChordGridProps {
     song: Song;
 }
 
-const SectionGrid: React.FC<{ section: Section }> = ({ section }) => {
+const SectionGrid: React.FC<{ section: Section; sectionIndex: number; activeBar: { sectionIndex: number; barIndex: number } | null }> = ({ section, sectionIndex, activeBar }) => {
     return (
         <div className="mb-12">
             <div className="flex items-center">
@@ -16,26 +17,35 @@ const SectionGrid: React.FC<{ section: Section }> = ({ section }) => {
             </div>
 
             <div className="grid grid-cols-4 border-l border-t border-zinc-500 bg-zinc-950">
-                {section.bars.map((bar, idx) => (
-                    <ChordCell key={`${section.label}-${idx}`} bar={bar} index={idx} />
-                ))}
+                {section.bars.map((bar, idx) => {
+                    const isActive = activeBar?.sectionIndex === sectionIndex && activeBar?.barIndex === idx;
+                    return (
+                        <ChordCell
+                            key={`${section.label}-${idx}`}
+                            bar={bar}
+                            index={idx}
+                            sectionIndex={sectionIndex}
+                            isActive={isActive}
+                        />
+                    );
+                })}
             </div>
         </div >
     );
 };
 
 export const ChordGrid: React.FC<ChordGridProps> = ({ song }) => {
+    const { activeBar } = useAppStore();
+
     return (
         <div className="mx-auto w-full max-w-4xl p-4">
-            <div className="mb-6 text-center">
-                <h1 className="text-3xl font-bold text-white">{song.title}</h1>
-                <p className="text-zinc-400">
-                    {song.composer} • {song.style} • {song.defaultKey}
-                </p>
-            </div>
-
             {song.sections.map((section, idx) => (
-                <SectionGrid key={idx} section={section} />
+                <SectionGrid
+                    key={idx}
+                    section={section}
+                    sectionIndex={idx}
+                    activeBar={activeBar}
+                />
             ))}
         </div>
     );

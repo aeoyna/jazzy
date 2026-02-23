@@ -1,0 +1,531 @@
+<region>
+sample=samples\e1-1.wav
+key=52
+ampeg_release=2.4
+offset=87300
+lovel=0 hivel=60 volume=15.0
+
+<region>
+sample=samples\e1-2.wav
+key=52
+ampeg_release=2.4
+offset=89300
+lovel=61 hivel=80 volume=15.0
+
+<region>
+sample=samples\e1-3.wav
+key=52
+ampeg_release=2.4
+offset=89300
+lovel=81 hivel=105 volume=15.0
+
+<region>
+sample=samples\e1-4.wav
+key=52
+ampeg_release=2.4
+offset=87300
+lovel=106 hivel=127 volume=15.0
+
+<region>
+sample=samples\a1.wav
+key=57
+ampeg_release=2.4
+offset=87300
+lovel=0 hivel=60 volume=15.0
+
+<region>
+sample=samples\a2.wav
+key=57
+ampeg_release=2.4
+offset=87300
+lovel=61 hivel=80 volume=15.0
+
+<region>
+sample=samples\a3.wav
+key=57
+ampeg_release=2.4
+offset=85300
+lovel=81 hivel=105 volume=15.0
+
+<region>
+sample=samples\a4.wav
+key=57
+ampeg_release=2.4
+offset=87300
+lovel=106 hivel=127 volume=15.0
+
+<region>
+sample=samples\d1-1.wav
+key=62
+ampeg_release=2.4
+offset=87300
+lovel=0 hivel=60 volume=15.0
+
+<region>
+sample=samples\d1-2.wav
+key=62
+ampeg_release=2.4
+offset=88100
+lovel=61 hivel=80 volume=18.0
+
+<region>
+sample=samples\d1-3.wav
+key=62
+ampeg_release=2.4
+offset=87300
+lovel=81 hivel=105 volume=15.0
+
+<region>
+sample=samples\d1-4.wav
+key=62
+ampeg_release=2.4
+offset=87300
+lovel=106 hivel=127 volume=15.0
+
+<region>
+sample=samples\g2-1.wav
+key=67
+ampeg_release=2.4
+offset=87300
+lovel=0 hivel=60 volume=15.0
+
+<region>
+sample=samples\g2-2.wav
+key=67
+ampeg_release=2.4
+offset=88600
+lovel=61 hivel=80 volume=15.0
+
+<region>
+sample=samples\g2-3.wav
+key=67
+ampeg_release=2.4
+offset=87300
+lovel=81 hivel=105 volume=15.0
+
+<region>
+sample=samples\g2-4.wav
+key=67
+ampeg_release=2.4
+offset=89300
+lovel=106 hivel=127 volume=15.0
+
+<region>
+sample=samples\f1-1.wav
+lokey=53
+hikey=54
+pitch_keycenter=53
+ampeg_release=2.4
+offset=109300
+lovel=0 hivel=60 volume=15.0
+tune=22
+
+<region>
+sample=samples\f1-2.wav
+lokey=53
+hikey=54
+pitch_keycenter=53
+ampeg_release=2.4
+offset=110300
+lovel=61 hivel=80 volume=15.0
+tune=22
+
+<region>
+sample=samples\f1-3.wav
+lokey=53
+hikey=54
+pitch_keycenter=53
+ampeg_release=2.4
+offset=110300
+lovel=81 hivel=105 volume=15.0
+tune=22
+
+<region>
+sample=samples\f1-4.wav
+lokey=53
+hikey=54
+pitch_keycenter=53
+ampeg_release=2.4
+offset=109300
+lovel=106 hivel=127 volume=15.0
+tune=22
+
+<region>
+sample=samples\g1-1.wav
+lokey=55
+hikey=56
+pitch_keycenter=55
+ampeg_release=2.4
+offset=122300
+lovel=0 hivel=60 volume=15.0
+tune=50
+
+<region>
+sample=samples\g1-2.wav
+lokey=55
+hikey=56
+pitch_keycenter=55
+ampeg_release=2.4
+offset=110300
+lovel=61 hivel=80 volume=15.0
+tune=50
+
+<region>
+sample=samples\g1-3.wav
+lokey=55
+hikey=56
+pitch_keycenter=55
+ampeg_release=2.4
+offset=110300
+lovel=81 hivel=105 volume=15.0
+tune=50
+
+<region>
+sample=samples\g1-4.wav
+lokey=55
+hikey=56
+pitch_keycenter=55
+ampeg_release=2.4
+offset=111000
+lovel=106 hivel=127 volume=15.0
+tune=50
+
+<region>
+sample=samples\b1-1.wav
+lokey=58
+hikey=59
+pitch_keycenter=58
+ampeg_release=2.4
+offset=108300
+lovel=0 hivel=60 volume=15.0
+
+<region>
+sample=samples\b1-2.wav
+lokey=58
+hikey=59
+pitch_keycenter=58
+ampeg_release=2.4
+offset=108300
+lovel=61 hivel=80 volume=15.0
+
+<region>
+sample=samples\b1-3.wav
+lokey=58
+hikey=59
+pitch_keycenter=58
+ampeg_release=2.4
+offset=110300
+lovel=81 hivel=105 volume=15.0
+
+<region>
+sample=samples\b1-4.wav
+lokey=58
+hikey=59
+pitch_keycenter=58
+ampeg_release=2.4
+offset=110300
+lovel=106 hivel=127 volume=15.0
+
+<region>
+sample=samples\c1-1.wav
+lokey=60
+hikey=61
+pitch_keycenter=60
+ampeg_release=2.4
+offset=110300
+lovel=0 hivel=60 volume=15.0
+tune=22
+
+<region>
+sample=samples\c1-2.wav
+lokey=60
+hikey=61
+pitch_keycenter=60
+ampeg_release=2.4
+offset=108300
+lovel=61 hivel=80 volume=15.0
+tune=22
+
+<region>
+sample=samples\c1-3.wav
+lokey=60
+hikey=61
+pitch_keycenter=60
+ampeg_release=2.4
+offset=108300
+lovel=81 hivel=105 volume=15.0
+tune=22
+
+<region>
+sample=samples\c1-4.wav
+lokey=60
+hikey=61
+pitch_keycenter=60
+ampeg_release=2.4
+offset=110300
+lovel=106 hivel=127 volume=15.0
+tune=22
+
+<region>
+sample=samples\eb1.wav
+lokey=63
+hikey=64
+pitch_keycenter=63
+ampeg_release=2.4
+offset=110300
+lovel=0 hivel=60 volume=15.0
+
+<region>
+sample=samples\eb2.wav
+lokey=63
+hikey=64
+pitch_keycenter=63
+ampeg_release=2.4
+offset=111100
+lovel=61 hivel=80 volume=15.0
+
+<region>
+sample=samples\eb3.wav
+lokey=63
+hikey=64
+pitch_keycenter=63
+ampeg_release=2.4
+offset=110800
+lovel=81 hivel=105 volume=15.0
+
+<region>
+sample=samples\eb4.wav
+lokey=63
+hikey=64
+pitch_keycenter=63
+ampeg_release=2.4
+offset=110700
+lovel=106 hivel=127 volume=15.0
+
+<region>
+sample=samples\f2-1.wav
+lokey=65
+hikey=66
+pitch_keycenter=65
+ampeg_release=2.4
+offset=107800
+lovel=0 hivel=60 volume=15.0
+
+<region>
+sample=samples\f2-2.wav
+lokey=65
+hikey=66
+pitch_keycenter=65
+ampeg_release=2.4
+offset=110800
+lovel=61 hivel=80 volume=15.0
+
+<region>
+sample=samples\f2-3.wav
+lokey=65
+hikey=66
+pitch_keycenter=65
+ampeg_release=2.4
+offset=112000
+lovel=81 hivel=105 volume=15.0
+
+<region>
+sample=samples\f2-4.wav
+lokey=65
+hikey=66
+pitch_keycenter=65
+ampeg_release=2.4
+offset=110800
+lovel=106 hivel=127 volume=15.0
+
+<region>
+sample=samples\ab1.wav
+lokey=68
+hikey=69
+pitch_keycenter=68
+ampeg_release=2.4
+offset=110300
+lovel=0 hivel=60 volume=15.0
+tune=22
+
+<region>
+sample=samples\ab2.wav
+lokey=68
+hikey=69
+pitch_keycenter=68
+ampeg_release=2.4
+offset=108800
+lovel=61 hivel=80 volume=15.0
+tune=22
+
+<region>
+sample=samples\ab3.wav
+lokey=68
+hikey=69
+pitch_keycenter=68
+ampeg_release=2.4
+offset=112300
+lovel=81 hivel=105 volume=15.0
+tune=22
+
+<region>
+sample=samples\ab4.wav
+lokey=68
+hikey=69
+pitch_keycenter=68
+ampeg_release=2.4
+offset=113300
+lovel=106 hivel=127 volume=15.0
+tune=22
+
+<region>
+sample=samples\b2-2.wav
+lokey=70
+hikey=71
+pitch_keycenter=70
+ampeg_release=2.4
+offset=111500
+lovel=0 hivel=60 volume=15.0
+
+<region>
+sample=samples\b2-2.wav
+lokey=70
+hikey=71
+pitch_keycenter=70
+ampeg_release=2.4
+offset=111500
+lovel=61 hivel=80 volume=15.0
+
+<region>
+sample=samples\b2-3.wav
+lokey=70
+hikey=71
+pitch_keycenter=70
+ampeg_release=2.4
+offset=108800
+lovel=81 hivel=105 volume=15.0
+
+<region>
+sample=samples\b2-4.wav
+lokey=70
+hikey=71
+pitch_keycenter=70
+ampeg_release=2.4
+offset=110300
+lovel=106 hivel=127 volume=15.0
+
+<region>
+sample=samples\c2-1.wav
+lokey=72
+hikey=73
+pitch_keycenter=72
+ampeg_release=2.4
+offset=111300
+lovel=0 hivel=60 volume=15.0
+
+<region>
+sample=samples\c2-2.wav
+lokey=72
+hikey=73
+pitch_keycenter=72
+ampeg_release=2.4
+offset=110300
+lovel=61 hivel=80 volume=15.0
+
+<region>
+sample=samples\c2-3.wav
+lokey=72
+hikey=73
+pitch_keycenter=72
+ampeg_release=2.4
+offset=109300
+lovel=81 hivel=105 volume=15.0
+
+<region>
+sample=samples\c2-4.wav
+lokey=72
+hikey=73
+pitch_keycenter=72
+ampeg_release=2.4
+offset=109300
+lovel=106 hivel=127 volume=15.0
+
+<region>
+sample=samples\d2-1.wav
+lokey=74
+hikey=75
+pitch_keycenter=74
+ampeg_release=2.4
+offset=108800
+lovel=0 hivel=60 volume=15.0
+tune=22
+
+<region>
+sample=samples\d2-2.wav
+lokey=74
+hikey=75
+pitch_keycenter=74
+ampeg_release=2.4
+offset=110800
+lovel=61 hivel=80 volume=15.0
+tune=22
+
+<region>
+sample=samples\d2-3.wav
+lokey=74
+hikey=75
+pitch_keycenter=74
+ampeg_release=2.4
+offset=108300
+lovel=81 hivel=105 volume=15.0
+tune=22
+
+<region>
+sample=samples\d2-4.wav
+lokey=74
+hikey=75
+pitch_keycenter=74
+ampeg_release=2.4
+offset=110300
+lovel=106 hivel=127 volume=15.0
+tune=22
+
+<region>
+sample=samples\e2-1.wav
+lokey=76
+hikey=79
+pitch_keycenter=76
+ampeg_release=2.4
+offset=109800
+lovel=0 hivel=60 volume=15.0
+tune=22
+
+<region>
+sample=samples\e2-2.wav
+lokey=76
+hikey=79
+pitch_keycenter=76
+ampeg_release=2.4
+offset=110300
+lovel=61 hivel=80 volume=15.0
+tune=22
+
+<region>
+sample=samples\e2-3.wav
+lokey=76
+hikey=79
+pitch_keycenter=76
+ampeg_release=2.4
+offset=108300
+lovel=81 hivel=105 volume=15.0
+tune=22
+
+<region>
+sample=samples\e2-4.wav
+lokey=76
+hikey=79
+pitch_keycenter=76
+ampeg_release=2.4
+offset=108300
+lovel=106 hivel=127 volume=15.0
+tune=22

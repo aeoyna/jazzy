@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, FileText, Play, Pause, Sliders, Settings } from 'lucide-react';
+import { Search, Mic, Play, Pause, Sliders, User } from 'lucide-react';
 import clsx from 'clsx';
 import { useAppStore } from '@/store/useAppStore';
 import { AudioEngine } from '@/lib/audio/AudioEngine';
@@ -7,10 +7,10 @@ import { AudioEngine } from '@/lib/audio/AudioEngine';
 interface BottomNavProps {
     onSearchClick: () => void;
     onMixerClick: () => void;
-    onSettingsClick: () => void;
+    onProfileClick: () => void;
 }
 
-export const BottomNav: React.FC<BottomNavProps> = ({ onSearchClick, onMixerClick, onSettingsClick }) => {
+export const BottomNav: React.FC<BottomNavProps> = ({ onSearchClick, onMixerClick, onProfileClick }) => {
     const { isPlaying, setIsPlaying, currentSong } = useAppStore();
 
     const togglePlay = async () => {
@@ -27,25 +27,30 @@ export const BottomNav: React.FC<BottomNavProps> = ({ onSearchClick, onMixerClic
     };
 
     return (
-        <div className="w-full shrink-0 h-16 flex items-center justify-around px-4 z-50 relative" style={{ backgroundColor: '#000000', bottom: '30px' }}>
-            <button onClick={onSearchClick} className="flex flex-col items-center justify-center" style={{ color: '#06b6d4', backgroundColor: '#000000' }}>
-                <Search size={24} strokeWidth={2.5} />
+        <div className="bottom-nav">
+            {/* 1. Search (Magnifying Glass) */}
+            <button onClick={onSearchClick} className="bottom-nav-button">
+                <Search size={28} strokeWidth={3} />
             </button>
 
-            <button className="flex flex-col items-center justify-center opacity-50 cursor-not-allowed" style={{ color: '#06b6d4', backgroundColor: '#000000' }}>
-                <FileText size={24} strokeWidth={2.5} />
+            {/* 2. Mic (Recording) - Placeholder */}
+            <button className="bottom-nav-button opacity-50 cursor-not-allowed">
+                <Mic size={28} strokeWidth={3} />
             </button>
 
-            <button onClick={togglePlay} className="flex flex-col items-center justify-center transform hover:scale-110 transition" style={{ color: '#06b6d4', backgroundColor: '#000000' }}>
-                {isPlaying ? <Pause size={32} fill="currentColor" strokeWidth={0} /> : <Play size={32} fill="currentColor" strokeWidth={0} />}
+            {/* 3. Play/Pause */}
+            <button onClick={togglePlay} className="bottom-nav-button bottom-nav-play">
+                {isPlaying ? <Pause size={40} fill="currentColor" strokeWidth={0} /> : <Play size={40} fill="currentColor" strokeWidth={0} />}
             </button>
 
-            <button onClick={onMixerClick} className="flex flex-col items-center justify-center" style={{ color: '#06b6d4', backgroundColor: '#000000' }}>
-                <Sliders size={24} strokeWidth={2.5} />
+            {/* 4. Mixer */}
+            <button onClick={onMixerClick} className="bottom-nav-button">
+                <Sliders size={28} strokeWidth={3} />
             </button>
 
-            <button onClick={onSettingsClick} className="flex flex-col items-center justify-center" style={{ color: '#06b6d4', backgroundColor: '#000000' }}>
-                <Settings size={24} strokeWidth={2.5} />
+            {/* 5. My Page (User Profile) */}
+            <button onClick={onProfileClick} className="bottom-nav-button">
+                <User size={28} strokeWidth={3} />
             </button>
         </div>
     );

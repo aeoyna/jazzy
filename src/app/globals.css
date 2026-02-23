@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
   --background: #ffffff;
@@ -106,4 +104,79 @@ body {
 *::-webkit-scrollbar {
   display: none;
   /* Chrome, Safari, Opera */
+}
+
+
+/* =========================================
+   Player Control Bar (Footer Top)
+   Edit here for Player styling
+   ========================================= */
+.player-controls {
+  @apply flex items-center justify-between px-6 pt-2 pb-0 w-full;
+  background-color: #000000;
+}
+
+.player-controls-button {
+  @apply transition opacity-90;
+  color: #22d3ee;
+  /* Icon Color: Cyan-400 */
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.player-controls-button:hover {
+  opacity: 1;
+  color: #67e8f9;
+  /* Hover Color */
+}
+
+.player-mid-container {
+  @apply flex flex-col items-center gap-0 mt-1.5;
+}
+
+.player-title {
+  @apply font-bold tracking-wide leading-none;
+  font-size: 1.25rem;
+  /* 20px */
+  color: #ffffff;
+}
+
+.player-title-sub {
+  @apply font-medium tracking-wide leading-tight mt-1;
+  font-size: 0.875rem;
+  /* 14px */
+  color: #71717a;
+  /* zinc-500 */
+}
+
+/* =========================================
+   Bottom Navigation Bar (Footer Bottom)
+   Edit here for Bottom Nav styling
+   ========================================= */
+.bottom-nav {
+  @apply w-full shrink-0 flex items-center justify-around px-2 z-50 relative;
+  background-color: #000000;
+  height: 5rem;
+  /* h-20 */
+  padding-bottom: 0;
+  /* pb-0 */
+}
+
+.bottom-nav-button {
+  @apply flex flex-col items-center justify-center p-2;
+  color: #22d3ee;
+  /* Icon Color */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* Specific handling for active/hover states */
+.bottom-nav-play {
+  @apply transition;
+}
+
+.bottom-nav-play:hover {
+  transform: scale(1.1);
 }
