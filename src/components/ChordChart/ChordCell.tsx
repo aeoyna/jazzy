@@ -89,7 +89,7 @@ export const ChordCell: React.FC<ChordCellProps> = ({ bar, isActive, index, sect
         <div
             className={clsx(
                 'flex flex-col w-full border-r border-b border-zinc-500 transition-colors duration-100 relative',
-                'h-[5.5rem]',
+                hasMultipleLyrics ? 'h-[6.5rem]' : 'h-[5.5rem]',
                 activeClass
             )}
         >
@@ -208,7 +208,44 @@ export const ChordCell: React.FC<ChordCellProps> = ({ bar, isActive, index, sect
                 </div>
             </div>
 
-            {/* Lyrics Strip - hidden from UI, data/logic preserved */}
+            {/* Lyrics Strip */}
+            <div
+                onClick={handleLyricsClick}
+                className={clsx(
+                    "w-full border-t border-zinc-600/50 flex flex-col justify-center px-1.5 overflow-hidden shrink-0 cursor-text transition-colors group",
+                    hasMultipleLyrics && !isEditing ? "h-[32px] py-0.5 space-y-[1px]" : "h-[18px]",
+                    isEditing ? "bg-amber-900/40 border-amber-500/50" : "bg-zinc-950/40 hover:bg-zinc-800/60"
+                )}
+            >
+                {isEditing ? (
+                    <input
+                        ref={inputRef}
+                        type="text"
+                        value={editValue}
+                        onChange={(e) => setEditValue(e.target.value)}
+                        onBlur={handleSaveLyrics}
+                        onKeyDown={handleKeyDown}
+                        className="w-full bg-transparent text-[10.5px] font-medium text-amber-200 outline-none font-sans tracking-wide leading-none"
+                        placeholder="Lyrics... (use / for multiple lines)"
+                    />
+                ) : (
+                    <>
+                        {lyricsLines.map((line, idx) => (
+                            <div key={idx} className="flex items-center">
+                                {hasMultipleLyrics && (
+                                    <span className="text-[8px] font-bold text-zinc-500 w-3 shrink-0">{idx + 1}.</span>
+                                )}
+                                <span className={clsx(
+                                    "font-medium text-amber-200/90 truncate font-sans tracking-wide leading-none",
+                                    hasMultipleLyrics ? "text-[9.5px]" : "text-[10.5px]"
+                                )}>
+                                    {line || ''}
+                                </span>
+                            </div>
+                        ))}
+                    </>
+                )}
+            </div>
         </div>
     );
 };

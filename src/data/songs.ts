@@ -11,14 +11,14 @@ export const autumnLeaves: Song = {
         {
             label: 'A',
             bars: [
-                { chords: ['Cm7'], repeatStart: true, lyrics: 'The au-tumn / Since you' },
-                { chords: ['F7'], lyrics: 'leaves / went' },
-                { chords: ['Bbmaj7'], lyrics: 'drift by my / a-way the' },
-                { chords: ['Ebmaj7'], lyrics: 'win-dow / days grow' },
-                { chords: ['Am7b5'], lyrics: 'The au-tumn / long, And' },
-                { chords: ['D7b9'], lyrics: 'leaves / soon Ill' },
-                { chords: ['Gm6'], lyrics: 'of red and / hear old' },
-                { chords: ['Gm6'], repeatEnd: 2, lyrics: 'gold / win-ters' },
+                { chords: ['Cm7'], repeatStart: true },
+                { chords: ['F7'] },
+                { chords: ['Bbmaj7'] },
+                { chords: ['Ebmaj7'] },
+                { chords: ['Am7b5'] },
+                { chords: ['D7b9'] },
+                { chords: ['Gm6'] },
+                { chords: ['Gm6'], repeatEnd: 2 },
             ],
         },
         {
