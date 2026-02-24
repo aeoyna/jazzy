@@ -127,7 +127,7 @@ body {
 .player-controls-button {
   @apply transition opacity-95 active:scale-95;
   filter: drop-shadow(-1px -1px 0 #00F2EA) drop-shadow(1px 1px 0 #FF0050);
-  color: #FFFFFF;
+  color: #FFD700;
   border: none;
   background: none;
   cursor: pointer;
@@ -173,7 +173,7 @@ body {
 .bottom-nav-button {
   @apply flex flex-col items-center justify-center p-2 active:scale-90 transition-transform;
   filter: drop-shadow(-1.5px -0.5px 0 #25F4EE) drop-shadow(1.5px 0.5px 0 #FE2C55);
-  color: #FFFFFF;
+  color: #FFD700;
   background-color: transparent;
   border: none;
   cursor: pointer;
