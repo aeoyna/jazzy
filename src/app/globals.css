@@ -7,8 +7,10 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #050505;
+    --foreground: #ffffff;
+    --accent: #E0115F;
+    --accent-glow: rgba(224, 17, 95, 0.4);
   }
 }
 
@@ -19,11 +21,19 @@ body {
 }
 
 .tiktok-layer {
-  filter: drop-shadow(-1.5px -0.5px 0 #25F4EE) drop-shadow(1.5px 0.5px 0 #FE2C55);
+  filter: drop-shadow(-1.5px -0.5px 0 #00F2EA) drop-shadow(1.5px 0.5px 0 #FF0050);
 }
 
-.tiktok-layer-gold {
+.tiktok-layer-ruby {
   filter: drop-shadow(-1px -1px 0 #00F2EA) drop-shadow(1px 1px 0 #FF0050);
+}
+
+.glass-card {
+  background: rgba(20, 20, 20, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(224, 17, 95, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 /* Custom Utilities for Animations */
@@ -127,7 +137,7 @@ body {
 .player-controls-button {
   @apply transition opacity-95 active:scale-95;
   filter: drop-shadow(-1px -1px 0 #00F2EA) drop-shadow(1px 1px 0 #FF0050);
-  color: #FFD700;
+  color: #E0115F;
   border: none;
   background: none;
   cursor: pointer;
@@ -172,8 +182,8 @@ body {
 
 .bottom-nav-button {
   @apply flex flex-col items-center justify-center p-2 active:scale-90 transition-transform;
-  filter: drop-shadow(-1.5px -0.5px 0 #25F4EE) drop-shadow(1.5px 0.5px 0 #FE2C55);
-  color: #FFD700;
+  filter: drop-shadow(-1.5px -0.5px 0 #00F2EA) drop-shadow(1.5px 0.5px 0 #FF0050);
+  color: #E0115F;
   background-color: transparent;
   border: none;
   cursor: pointer;

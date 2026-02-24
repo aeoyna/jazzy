@@ -94,7 +94,7 @@ export const useAppStore = create<AppState>((set) => ({
     // Default Settings
     fontSize: 18,
     minorDisplay: 'minus',
-    highlightColor: 'Orange',
+    highlightColor: 'Pink',
     useGermanB: false,
     highlightingEnabled: true, // Enable by default
 

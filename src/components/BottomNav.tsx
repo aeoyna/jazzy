@@ -40,7 +40,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({ onSearchClick, onMixerClic
 
             {/* 3. Play/Pause */}
             <button onClick={togglePlay} className="bottom-nav-button bottom-nav-play">
-                {isPlaying ? <Pause size={40} fill="currentColor" strokeWidth={0} /> : <Play size={40} fill="currentColor" strokeWidth={0} />}
+                {isPlaying ? <Pause size={40} fill="#E0115F" strokeWidth={0} /> : <Play size={40} fill="#E0115F" strokeWidth={0} />}
             </button>
 
             {/* 4. Mixer */}

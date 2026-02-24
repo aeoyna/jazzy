@@ -41,7 +41,7 @@ export default function Home() {
       {/* Left Column (Desktop) */}
       <div className="hidden lg:flex flex-col justify-between h-screen p-12 fixed left-0 top-0 w-80 z-0">
         <div>
-          <h1 className="text-[#FFD700] text-5xl font-bold tracking-tighter tiktok-layer-gold">jam</h1>
+          <h1 className="text-[#E0115F] text-5xl font-bold tracking-tighter tiktok-layer-ruby">jam</h1>
         </div>
         <div className="mb-12">
           <img src="/logo.png" alt="jam logo" className="w-32 h-32 object-contain" />

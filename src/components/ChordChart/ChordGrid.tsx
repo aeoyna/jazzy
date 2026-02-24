@@ -11,7 +11,7 @@ const SectionGrid: React.FC<{ section: Section; sectionIndex: number; activeBar:
     return (
         <div className="mb-12">
             <div className="flex items-center">
-                <span className="flex h-6 w-7 items-center justify-center bg-zinc-800 font-bold text-[#FFD700] text-xs border border-zinc-700 mb-[-1px] z-10 rounded-t-sm uppercase tracking-wider">
+                <span className="flex h-6 w-7 items-center justify-center bg-zinc-900 font-bold text-[#E0115F] text-xs border border-zinc-700 mb-[-1px] z-10 rounded-t-sm uppercase tracking-wider tiktok-layer-ruby">
                     {section.label}
                 </span>
             </div>

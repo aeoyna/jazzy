@@ -18,12 +18,11 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={onClose}>
             <div
                 className={clsx(
-                    "bg-red-900 border border-red-800 rounded-lg p-6 w-80 shadow-2xl transition-transform duration-75",
+                    "glass-card rounded-2xl p-6 w-80 shadow-2xl transition-transform duration-75",
                     isDragging ? "cursor-grabbing" : ""
                 )}
                 style={{
                     transform: `translate(${position.x}px, ${position.y}px)`,
-                    backgroundColor: '#000000'
                 }}
                 onClick={e => e.stopPropagation()}
             >
@@ -49,7 +48,7 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                     {/* Piano */}
                     <div>
                         <div className="flex justify-between mb-1">
-                            <label className="text-xs font-bold text-[#FFD700] tiktok-layer-gold uppercase tracking-wide">Piano</label>
+                            <label className="text-xs font-bold text-[#E0115F] tiktok-layer-ruby uppercase tracking-wide">Piano</label>
                             <span className="text-xs text-zinc-400">{Math.round(instrumentVolumes.piano + 60)}%</span>
                         </div>
                         <input
@@ -64,14 +63,14 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                                     AudioEngine.getInstance().setInstrumentVolume('piano', vol);
                                 });
                             }}
-                            className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-[#FFD700]"
+                            className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-[#E0115F]"
                         />
                     </div>
 
                     {/* Bass */}
                     <div>
                         <div className="flex justify-between mb-1">
-                            <label className="text-xs font-bold text-[#FFD700] tiktok-layer-gold uppercase tracking-wide">Bass</label>
+                            <label className="text-xs font-bold text-[#E0115F] tiktok-layer-ruby uppercase tracking-wide">Bass</label>
                             <span className="text-xs text-zinc-400">{Math.round(instrumentVolumes.bass + 60)}%</span>
                         </div>
                         <input
@@ -86,14 +85,14 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                                     AudioEngine.getInstance().setInstrumentVolume('bass', vol);
                                 });
                             }}
-                            className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-[#FFD700]"
+                            className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-[#E0115F]"
                         />
                     </div>
 
                     {/* Drums */}
                     <div>
                         <div className="flex justify-between mb-1">
-                            <label className="text-xs font-bold text-[#FFD700] tiktok-layer-gold uppercase tracking-wide">Drums</label>
+                            <label className="text-xs font-bold text-[#E0115F] tiktok-layer-ruby uppercase tracking-wide">Drums</label>
                             <span className="text-xs text-zinc-400">{Math.round(instrumentVolumes.drums + 60)}%</span>
                         </div>
                         <input
@@ -108,14 +107,14 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                                     AudioEngine.getInstance().setInstrumentVolume('drums', vol);
                                 });
                             }}
-                            className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-[#FFD700]"
+                            className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-[#E0115F]"
                         />
                     </div>
 
                     {/* Metronome */}
                     <div>
                         <div className="flex justify-between mb-1">
-                            <label className="text-xs font-bold text-[#FFD700] tiktok-layer-gold uppercase tracking-wide">Metronome</label>
+                            <label className="text-xs font-bold text-[#E0115F] tiktok-layer-ruby uppercase tracking-wide">Metronome</label>
                             <span className="text-xs text-zinc-400">{Math.round(instrumentVolumes.metronome + 60)}%</span>
                         </div>
                         <input
@@ -130,14 +129,14 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                                     AudioEngine.getInstance().setInstrumentVolume('metronome', vol);
                                 });
                             }}
-                            className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-[#FFD700]"
+                            className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-[#E0115F]"
                         />
                     </div>
 
                     {/* Reverb */}
                     <div>
                         <div className="flex justify-between mb-1">
-                            <label className="text-xs font-bold text-[#FFD700] tiktok-layer-gold uppercase tracking-wide">Reverb</label>
+                            <label className="text-xs font-bold text-[#E0115F] tiktok-layer-ruby uppercase tracking-wide">Reverb</label>
                             <span className="text-xs text-zinc-400">{Math.round(useAppStore.getState().reverbWet * 100)}%</span>
                         </div>
                         <input
@@ -153,7 +152,7 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                                     AudioEngine.getInstance().setReverbWet(wet);
                                 });
                             }}
-                            className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-[#FFD700]"
+                            className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-[#E0115F]"
                         />
                     </div>
                 </div>
@@ -172,7 +171,7 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                             }}
                             className={clsx(
                                 "w-10 h-5 rounded-full p-1 transition-colors duration-200 ease-in-out flex shadow-inner",
-                                useAppStore.getState().gateEnabled ? "bg-[#FFD700] tiktok-layer-gold" : "bg-zinc-700"
+                                useAppStore.getState().gateEnabled ? "bg-[#E0115F] tiktok-layer-ruby" : "bg-zinc-700"
                             )}
                         >
                             <div
@@ -201,7 +200,7 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                                         AudioEngine.getInstance().setGateParams(useAppStore.getState().gateEnabled, threshold);
                                     });
                                 }}
-                                className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-[#FFD700]"
+                                className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-[#E0115F]"
                             />
                         </div>
                     )}
@@ -209,6 +208,6 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
 
                 <p className="text-xs text-zinc-500 text-center mt-6">More settings coming soon...</p>
             </div>
-        </div>
+        </div >
     );
 };
