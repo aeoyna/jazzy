@@ -21,7 +21,7 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({ song, onEditClic
                 className="player-mid-container cursor-pointer hover:bg-zinc-800/50 rounded-lg p-1 transition-colors group"
                 onClick={onTitleClick}
             >
-                <h2 className="player-title group-hover:text-[#C70039] transition-colors">{song.title}</h2>
+                <h2 className="player-title group-hover:text-red-400 transition-colors">{song.title}</h2>
                 <p className="player-title-sub">
                     {song.composer}
                     {song.arranger && <span className="text-zinc-500 ml-1">/ Arr: {song.arranger}</span>}
@@ -30,7 +30,7 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({ song, onEditClic
 
             {/* Disc Button (Placeholder) */}
             <button className="player-controls-button" title="Backing Options">
-                <Disc size={32} strokeWidth={2.5} fill="rgba(255,61,0,0.2)" />
+                <Disc size={32} strokeWidth={2.5} fill="rgba(239,68,68,0.2)" />
             </button>
         </div>
     );

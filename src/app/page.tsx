@@ -37,19 +37,22 @@ export default function Home() {
   if (!currentSong) return null;
 
   return (
-    <div className="flex justify-center min-h-screen bg-black lg:justify-between w-full relative">
+    <div className="flex justify-center min-h-screen bg-zinc-900 lg:justify-between w-full relative">
       {/* Left Column (Desktop) */}
       <div className="hidden lg:flex flex-col justify-between h-screen p-12 fixed left-0 top-0 w-80 z-0">
         <div>
-          <h1 className="text-[#C70039] text-5xl font-bold tracking-tighter tiktok-layer-ruby">jam</h1>
+          <h1 className="text-white text-5xl font-bold tracking-tighter">jam</h1>
         </div>
         <div className="mb-12">
-          <img src="/logo.png" alt="jam logo" className="w-32 h-32 object-contain" />
+          {/* Logo Placeholder */}
+          <div className="w-32 h-32 bg-zinc-800 rounded-full flex items-center justify-center text-zinc-500 border border-zinc-700">
+            <span className="text-xs">Logo</span>
+          </div>
         </div>
       </div>
 
       {/* Main App Content - Centered */}
-      <main className="flex h-[100dvh] w-full max-w-md flex-col bg-black text-amber-500 overflow-hidden relative shadow-2xl mx-auto z-10 border-x border-zinc-800">
+      <main className="flex h-[100dvh] w-full max-w-md flex-col bg-black text-red-500 overflow-hidden relative shadow-2xl mx-auto z-10 border-x border-zinc-800">
         {/* Main Content Area */}
         <div className="flex-1 overflow-y-auto">
           <ChordGrid song={currentSong} />

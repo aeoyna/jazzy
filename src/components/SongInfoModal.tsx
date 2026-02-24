@@ -54,7 +54,7 @@ export const SongInfoModal: React.FC<SongInfoModalProps> = ({ song, onClose }) =
                 {/* Header */}
                 <header className="flex items-center justify-between px-4 py-3 border-b border-zinc-800">
                     <div className="flex items-center gap-2">
-                        <Info className="w-5 h-5 text-amber-500" />
+                        <Info className="w-5 h-5 text-red-500" />
                         <h2 className="font-bold text-[17px] tracking-wide text-zinc-100">曲の詳細 Info</h2>
                     </div>
                     <button onClick={onClose} className="p-2 -mr-2 text-zinc-400 hover:text-white transition-colors">
@@ -126,7 +126,7 @@ export const SongInfoModal: React.FC<SongInfoModalProps> = ({ song, onClose }) =
                     </button>
                     <button
                         onClick={handleApply}
-                        className="px-6 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded-lg font-bold transition-colors text-sm"
+                        className="px-6 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg font-bold transition-colors text-sm"
                     >
                         完了
                     </button>

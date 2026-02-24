@@ -9,8 +9,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "jam",
-  description: "A professional tool for jazz musicians to practice and play together.",
+  title: "JAM",
+  description: "Minimalist Jazz Jam Session Tool",
 };
 
 export default function RootLayout({

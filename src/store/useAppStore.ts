@@ -94,7 +94,7 @@ export const useAppStore = create<AppState>((set) => ({
     // Default Settings
     fontSize: 18,
     minorDisplay: 'minus',
-    highlightColor: 'Pink',
+    highlightColor: 'Yellow',
     useGermanB: false,
     highlightingEnabled: true, // Enable by default
 
@@ -109,7 +109,7 @@ export const useAppStore = create<AppState>((set) => ({
     userProfile: {
         displayName: 'Nishino Koki',
         handle: 'koki_nishino_jazz',
-        bio: 'jam - ジャズの演奏とコード進行の研究。セッション参加記録など。',
+        bio: 'Jazzyな演奏とコード進行の研究。セッション参加記録など。',
     },
 
     setSong: (song) => set({ currentSong: song, tempo: song.defaultTempo, activeBar: null }),

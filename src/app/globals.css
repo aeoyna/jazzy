@@ -7,11 +7,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #020202;
-    --foreground: #ffffff;
-    --accent: #C70039;
-    /* Deep Elegant Ruby */
-    --accent-glow: rgba(199, 0, 57, 0.3);
+    --background: #0a0a0a;
+    --foreground: #ededed;
   }
 }
 
@@ -19,22 +16,6 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-}
-
-.tiktok-layer {
-  filter: drop-shadow(-1.5px -0.5px 0 #00F2EA) drop-shadow(1.5px 0.5px 0 #FF0050);
-}
-
-.tiktok-layer-ruby {
-  filter: drop-shadow(-1px -1px 0 #00F2EA) drop-shadow(1px 1px 0 #FF0050);
-}
-
-.glass-card {
-  background: rgba(20, 20, 20, 0.4);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(224, 17, 95, 0.2);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 /* Custom Utilities for Animations */
@@ -136,9 +117,9 @@ body {
 }
 
 .player-controls-button {
-  @apply transition opacity-90 active:scale-95 hover:opacity-100;
-  filter: drop-shadow(-0.5px -0.5px 0 rgba(0, 242, 234, 0.5)) drop-shadow(0.5px 0.5px 0 rgba(255, 0, 80, 0.5));
-  color: #C70039;
+  @apply transition opacity-90;
+  color: #ef4444;
+  /* Icon Color: Red-500 */
   border: none;
   background: none;
   cursor: pointer;
@@ -146,7 +127,8 @@ body {
 
 .player-controls-button:hover {
   opacity: 1;
-  filter: drop-shadow(-2px -1px 0 #00F2EA) drop-shadow(2px 1px 0 #FF0050);
+  color: #f87171;
+  /* Hover Color: Red-400 */
 }
 
 .player-mid-container {
@@ -182,9 +164,9 @@ body {
 }
 
 .bottom-nav-button {
-  @apply flex flex-col items-center justify-center p-2 active:scale-90 transition-transform opacity-90 hover:opacity-100;
-  filter: drop-shadow(-1px -0.5px 0 rgba(0, 242, 234, 0.4)) drop-shadow(1px 0.5px 0 rgba(255, 0, 80, 0.4));
-  color: #C70039;
+  @apply flex flex-col items-center justify-center p-2;
+  color: #ef4444;
+  /* Icon Color: Red-500 */
   background-color: transparent;
   border: none;
   cursor: pointer;

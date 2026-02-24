@@ -38,13 +38,13 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
             onClick={() => setActiveTab(id)}
             className={clsx(
                 "flex items-center gap-2 px-4 py-3 text-sm font-medium transition-all relative",
-                activeTab === id ? "text-[#C70039]" : "text-zinc-400 hover:text-zinc-200"
+                activeTab === id ? "text-amber-500" : "text-zinc-400 hover:text-zinc-200"
             )}
         >
             <Icon size={16} />
             {label}
             {activeTab === id && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#C70039] shadow-[0_0_8px_rgba(224,17,95,0.5)]" />
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.5)]" />
             )}
         </button>
     );
@@ -53,12 +53,13 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/90 backdrop-blur-sm transition-opacity duration-300" onClick={onClose}>
             <div
                 className={clsx(
-                    "glass-card w-[500px] max-w-[95vw] rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[85vh] animate-in fade-in zoom-in-95 duration-200",
+                    "w-[500px] max-w-[95vw] bg-red-950 border border-red-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[85vh] animate-in fade-in zoom-in-95 duration-200",
                     isDragging ? "cursor-grabbing" : ""
                 )}
                 style={{
                     transform: `translate(${position.x}px, ${position.y}px)`,
                     transition: isDragging ? 'none' : 'transform 0.1s ease-out',
+                    backgroundColor: '#000000'
                 }}
                 onClick={e => e.stopPropagation()}
             >
@@ -68,7 +69,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
                     onMouseDown={handleMouseDown}
                 >
                     <h2 className="text-lg font-semibold text-white flex items-center gap-2 pointer-events-none">
-                        <SettingsIcon size={20} className="text-[#C70039]" />
+                        <SettingsIcon size={20} className="text-amber-500" />
                         Settings
                     </h2>
                     <div className="flex gap-2">
@@ -101,7 +102,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
                                 <div className="bg-zinc-900 rounded-xl p-5 border border-zinc-800">
                                     <div className="flex justify-between items-center mb-4">
                                         <div className="text-sm text-zinc-300">Transpose</div>
-                                        <div className="text-xs px-2 py-1 rounded bg-black/30 text-[#C70039] font-mono border border-amber-500/20">
+                                        <div className="text-xs px-2 py-1 rounded bg-black/30 text-amber-500 font-mono border border-amber-500/20">
                                             Original: {currentSong?.defaultKey || 'C'}
                                         </div>
                                     </div>
@@ -109,7 +110,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
                                     <div className="flex items-center justify-between gap-4">
                                         <button
                                             onClick={() => setTranspose(transpose - 1)}
-                                            className="w-12 h-12 flex items-center justify-center rounded-xl bg-black/20 hover:bg-amber-500/20 hover:text-[#C70039] border border-white/10 hover:border-amber-500/50 transition-all active:scale-95"
+                                            className="w-12 h-12 flex items-center justify-center rounded-xl bg-black/20 hover:bg-amber-500/20 hover:text-amber-500 border border-white/10 hover:border-amber-500/50 transition-all active:scale-95"
                                         >
                                             <span className="text-xl font-medium">-</span>
                                         </button>
@@ -123,7 +124,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
 
                                         <button
                                             onClick={() => setTranspose(transpose + 1)}
-                                            className="w-12 h-12 flex items-center justify-center rounded-xl bg-black/20 hover:bg-amber-500/20 hover:text-[#C70039] border border-white/10 hover:border-amber-500/50 transition-all active:scale-95"
+                                            className="w-12 h-12 flex items-center justify-center rounded-xl bg-black/20 hover:bg-amber-500/20 hover:text-amber-500 border border-white/10 hover:border-amber-500/50 transition-all active:scale-95"
                                         >
                                             <span className="text-xl font-medium">+</span>
                                         </button>
@@ -139,7 +140,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
                                 <div className="mb-6">
                                     <div className="flex justify-between mb-2">
                                         <label className="text-sm text-zinc-300">Font Size</label>
-                                        <span className="text-sm text-[#C70039] font-mono">{fontSize}pt</span>
+                                        <span className="text-sm text-amber-500 font-mono">{fontSize}pt</span>
                                     </div>
                                     <input
                                         type="range"
@@ -218,7 +219,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
                                     </div>
                                     <div className={clsx(
                                         "w-11 h-6 rounded-full transition-colors relative",
-                                        useGermanB ? "bg-[#C70039]" : "bg-zinc-700"
+                                        useGermanB ? "bg-amber-600" : "bg-zinc-700"
                                     )}>
                                         <div className={clsx(
                                             "absolute top-1 left-1 bg-white w-4 h-4 rounded-full transition-transform shadow-sm",
@@ -241,7 +242,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
                                     </div>
                                     <div className={clsx(
                                         "w-11 h-6 rounded-full transition-colors relative",
-                                        highlightingEnabled ? "bg-[#C70039]" : "bg-zinc-700"
+                                        highlightingEnabled ? "bg-amber-600" : "bg-zinc-700"
                                     )}>
                                         <div className={clsx(
                                             "absolute top-1 left-1 bg-white w-4 h-4 rounded-full transition-transform shadow-sm",
@@ -255,10 +256,10 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
 
                     {activeTab === 'about' && (
                         <div className="animate-in slide-in-from-right-4 duration-300 fade-in text-center py-8">
-                            <div className="w-20 h-20 mx-auto mb-6 rotate-3">
-                                <img src="/logo.png" alt="jam logo" className="w-full h-full object-contain drop-shadow-2xl" />
+                            <div className="w-20 h-20 bg-gradient-to-br from-amber-500 to-orange-600 rounded-3xl mx-auto flex items-center justify-center shadow-xl mb-6 rotate-3">
+                                <Music size={40} className="text-white" />
                             </div>
-                            <h3 className="text-2xl font-bold text-white mb-2">jam</h3>
+                            <h3 className="text-2xl font-bold text-white mb-2">Jazzy</h3>
                             <p className="text-zinc-400 text-sm mb-8">
                                 The ultimate jazz practice companion.
                             </p>

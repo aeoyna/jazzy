@@ -36,7 +36,7 @@ export const ChordCell: React.FC<ChordCellProps> = ({ bar, isActive, index, sect
             case 'Blue': return 'bg-blue-600/50 border-blue-500';
             case 'Pink': return 'bg-pink-600/50 border-pink-500';
             case 'Orange': return 'bg-orange-600/50 border-orange-500';
-            default: return 'bg-amber-500/50 border-amber-500';
+            default: return 'bg-red-500/50 border-red-500';
         }
     };
 
@@ -88,7 +88,7 @@ export const ChordCell: React.FC<ChordCellProps> = ({ bar, isActive, index, sect
     return (
         <div
             className={clsx(
-                'flex flex-col w-full border-r border-b border-zinc-800 transition-colors duration-100 relative',
+                'flex flex-col w-full border-r border-b border-zinc-500 transition-colors duration-100 relative',
                 hasMultipleLyrics ? 'h-[6.5rem]' : 'h-[5.5rem]',
                 activeClass
             )}
@@ -214,7 +214,7 @@ export const ChordCell: React.FC<ChordCellProps> = ({ bar, isActive, index, sect
                 className={clsx(
                     "w-full border-t border-zinc-600/50 flex flex-col justify-center px-1.5 overflow-hidden shrink-0 cursor-text transition-colors group",
                     hasMultipleLyrics && !isEditing ? "h-[32px] py-0.5 space-y-[1px]" : "h-[18px]",
-                    isEditing ? "bg-amber-900/40 border-amber-500/50" : "bg-zinc-950/40 hover:bg-zinc-800/60"
+                    isEditing ? "bg-red-900/40 border-red-500/50" : "bg-zinc-950/40 hover:bg-zinc-800/60"
                 )}
             >
                 {isEditing ? (
@@ -225,7 +225,7 @@ export const ChordCell: React.FC<ChordCellProps> = ({ bar, isActive, index, sect
                         onChange={(e) => setEditValue(e.target.value)}
                         onBlur={handleSaveLyrics}
                         onKeyDown={handleKeyDown}
-                        className="w-full bg-transparent text-[10.5px] font-medium text-amber-200 outline-none font-sans tracking-wide leading-none"
+                        className="w-full bg-transparent text-[10.5px] font-medium text-red-200 outline-none font-sans tracking-wide leading-none"
                         placeholder="Lyrics... (use / for multiple lines)"
                     />
                 ) : (
@@ -236,7 +236,7 @@ export const ChordCell: React.FC<ChordCellProps> = ({ bar, isActive, index, sect
                                     <span className="text-[8px] font-bold text-zinc-500 w-3 shrink-0">{idx + 1}.</span>
                                 )}
                                 <span className={clsx(
-                                    "font-medium text-amber-200/90 truncate font-sans tracking-wide leading-none",
+                                    "font-medium text-red-200/90 truncate font-sans tracking-wide leading-none",
                                     hasMultipleLyrics ? "text-[9.5px]" : "text-[10.5px]"
                                 )}>
                                     {line || ''}
