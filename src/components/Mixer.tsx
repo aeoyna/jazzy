@@ -49,7 +49,7 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                     {/* Piano */}
                     <div>
                         <div className="flex justify-between mb-1">
-                            <label className="text-xs font-bold text-[#FFD700] uppercase tracking-wide">Piano</label>
+                            <label className="text-xs font-bold text-white tiktok-layer-gold uppercase tracking-wide">Piano</label>
                             <span className="text-xs text-zinc-400">{Math.round(instrumentVolumes.piano + 60)}%</span>
                         </div>
                         <input
@@ -71,7 +71,7 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                     {/* Bass */}
                     <div>
                         <div className="flex justify-between mb-1">
-                            <label className="text-xs font-bold text-[#FFD700] uppercase tracking-wide">Bass</label>
+                            <label className="text-xs font-bold text-white tiktok-layer-gold uppercase tracking-wide">Bass</label>
                             <span className="text-xs text-zinc-400">{Math.round(instrumentVolumes.bass + 60)}%</span>
                         </div>
                         <input
@@ -93,7 +93,7 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                     {/* Drums */}
                     <div>
                         <div className="flex justify-between mb-1">
-                            <label className="text-xs font-bold text-[#FFD700] uppercase tracking-wide">Drums</label>
+                            <label className="text-xs font-bold text-white tiktok-layer-gold uppercase tracking-wide">Drums</label>
                             <span className="text-xs text-zinc-400">{Math.round(instrumentVolumes.drums + 60)}%</span>
                         </div>
                         <input
@@ -115,7 +115,7 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                     {/* Metronome */}
                     <div>
                         <div className="flex justify-between mb-1">
-                            <label className="text-xs font-bold text-[#FFD700] uppercase tracking-wide">Metronome</label>
+                            <label className="text-xs font-bold text-white tiktok-layer-gold uppercase tracking-wide">Metronome</label>
                             <span className="text-xs text-zinc-400">{Math.round(instrumentVolumes.metronome + 60)}%</span>
                         </div>
                         <input
@@ -137,7 +137,7 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                     {/* Reverb */}
                     <div>
                         <div className="flex justify-between mb-1">
-                            <label className="text-xs font-bold text-[#FFD700] uppercase tracking-wide">Reverb</label>
+                            <label className="text-xs font-bold text-white tiktok-layer-gold uppercase tracking-wide">Reverb</label>
                             <span className="text-xs text-zinc-400">{Math.round(useAppStore.getState().reverbWet * 100)}%</span>
                         </div>
                         <input
@@ -172,7 +172,7 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                             }}
                             className={clsx(
                                 "w-10 h-5 rounded-full p-1 transition-colors duration-200 ease-in-out flex shadow-inner",
-                                useAppStore.getState().gateEnabled ? "bg-[#FFD700]" : "bg-zinc-700"
+                                useAppStore.getState().gateEnabled ? "bg-white tiktok-layer-gold" : "bg-zinc-700"
                             )}
                         >
                             <div

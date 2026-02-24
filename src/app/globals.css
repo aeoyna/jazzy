@@ -18,6 +18,14 @@ body {
   font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
+.tiktok-layer {
+  filter: drop-shadow(-1.5px -0.5px 0 #25F4EE) drop-shadow(1.5px 0.5px 0 #FE2C55);
+}
+
+.tiktok-layer-gold {
+  filter: drop-shadow(-1px -1px 0 #00F2EA) drop-shadow(1px 1px 0 #FF0050);
+}
+
 /* Custom Utilities for Animations */
 @layer utilities {
   .animate-in {
@@ -117,9 +125,8 @@ body {
 }
 
 .player-controls-button {
-  @apply transition opacity-90;
-  color: #FFD700;
-  /* Premium Gold */
+  @apply transition opacity-95 tiktok-layer-gold active:scale-95;
+  color: #FFFFFF;
   border: none;
   background: none;
   cursor: pointer;
@@ -127,8 +134,7 @@ body {
 
 .player-controls-button:hover {
   opacity: 1;
-  color: #FFF200;
-  /* Bright Gold */
+  filter: drop-shadow(-2px -1px 0 #00F2EA) drop-shadow(2px 1px 0 #FF0050);
 }
 
 .player-mid-container {
@@ -164,9 +170,8 @@ body {
 }
 
 .bottom-nav-button {
-  @apply flex flex-col items-center justify-center p-2;
-  color: #FFD700;
-  /* Premium Gold Icon */
+  @apply flex flex-col items-center justify-center p-2 tiktok-layer active:scale-90 transition-transform;
+  color: #FFFFFF;
   background-color: transparent;
   border: none;
   cursor: pointer;
