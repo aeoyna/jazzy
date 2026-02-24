@@ -48,7 +48,7 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                     {/* Piano */}
                     <div>
                         <div className="flex justify-between mb-1">
-                            <label className="text-xs font-bold text-[#E0115F] tiktok-layer-ruby uppercase tracking-wide">Piano</label>
+                            <label className="text-xs font-bold text-[#FF3D00] tiktok-layer-ruby uppercase tracking-wide">Piano</label>
                             <span className="text-xs text-zinc-400">{Math.round(instrumentVolumes.piano + 60)}%</span>
                         </div>
                         <input
@@ -63,14 +63,14 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                                     AudioEngine.getInstance().setInstrumentVolume('piano', vol);
                                 });
                             }}
-                            className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-[#E0115F]"
+                            className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-[#FF3D00]"
                         />
                     </div>
 
                     {/* Bass */}
                     <div>
                         <div className="flex justify-between mb-1">
-                            <label className="text-xs font-bold text-[#E0115F] tiktok-layer-ruby uppercase tracking-wide">Bass</label>
+                            <label className="text-xs font-bold text-[#FF3D00] tiktok-layer-ruby uppercase tracking-wide">Bass</label>
                             <span className="text-xs text-zinc-400">{Math.round(instrumentVolumes.bass + 60)}%</span>
                         </div>
                         <input
@@ -85,14 +85,14 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                                     AudioEngine.getInstance().setInstrumentVolume('bass', vol);
                                 });
                             }}
-                            className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-[#E0115F]"
+                            className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-[#FF3D00]"
                         />
                     </div>
 
                     {/* Drums */}
                     <div>
                         <div className="flex justify-between mb-1">
-                            <label className="text-xs font-bold text-[#E0115F] tiktok-layer-ruby uppercase tracking-wide">Drums</label>
+                            <label className="text-xs font-bold text-[#FF3D00] tiktok-layer-ruby uppercase tracking-wide">Drums</label>
                             <span className="text-xs text-zinc-400">{Math.round(instrumentVolumes.drums + 60)}%</span>
                         </div>
                         <input
@@ -107,14 +107,14 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                                     AudioEngine.getInstance().setInstrumentVolume('drums', vol);
                                 });
                             }}
-                            className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-[#E0115F]"
+                            className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-[#FF3D00]"
                         />
                     </div>
 
                     {/* Metronome */}
                     <div>
                         <div className="flex justify-between mb-1">
-                            <label className="text-xs font-bold text-[#E0115F] tiktok-layer-ruby uppercase tracking-wide">Metronome</label>
+                            <label className="text-xs font-bold text-[#FF3D00] tiktok-layer-ruby uppercase tracking-wide">Metronome</label>
                             <span className="text-xs text-zinc-400">{Math.round(instrumentVolumes.metronome + 60)}%</span>
                         </div>
                         <input
@@ -129,14 +129,14 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                                     AudioEngine.getInstance().setInstrumentVolume('metronome', vol);
                                 });
                             }}
-                            className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-[#E0115F]"
+                            className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-[#FF3D00]"
                         />
                     </div>
 
                     {/* Reverb */}
                     <div>
                         <div className="flex justify-between mb-1">
-                            <label className="text-xs font-bold text-[#E0115F] tiktok-layer-ruby uppercase tracking-wide">Reverb</label>
+                            <label className="text-xs font-bold text-[#FF3D00] tiktok-layer-ruby uppercase tracking-wide">Reverb</label>
                             <span className="text-xs text-zinc-400">{Math.round(useAppStore.getState().reverbWet * 100)}%</span>
                         </div>
                         <input
@@ -152,7 +152,7 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                                     AudioEngine.getInstance().setReverbWet(wet);
                                 });
                             }}
-                            className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-[#E0115F]"
+                            className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-[#FF3D00]"
                         />
                     </div>
                 </div>
@@ -171,7 +171,7 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                             }}
                             className={clsx(
                                 "w-10 h-5 rounded-full p-1 transition-colors duration-200 ease-in-out flex shadow-inner",
-                                useAppStore.getState().gateEnabled ? "bg-[#E0115F] tiktok-layer-ruby" : "bg-zinc-700"
+                                useAppStore.getState().gateEnabled ? "bg-[#FF3D00] tiktok-layer-ruby" : "bg-zinc-700"
                             )}
                         >
                             <div
@@ -200,7 +200,7 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                                         AudioEngine.getInstance().setGateParams(useAppStore.getState().gateEnabled, threshold);
                                     });
                                 }}
-                                className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-[#E0115F]"
+                                className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-[#FF3D00]"
                             />
                         </div>
                     )}

@@ -9,8 +9,11 @@
   :root {
     --background: #050505;
     --foreground: #ffffff;
-    --accent: #E0115F;
-    --accent-glow: rgba(224, 17, 95, 0.4);
+    --accent: #FF3D00;
+    /* Vibrant Red from Logo */
+    --accent-glow: rgba(255, 61, 0, 0.4);
+    --logo-orange: #FFB700;
+    --logo-purple: #780050;
   }
 }
 
@@ -137,7 +140,7 @@ body {
 .player-controls-button {
   @apply transition opacity-95 active:scale-95;
   filter: drop-shadow(-1px -1px 0 #00F2EA) drop-shadow(1px 1px 0 #FF0050);
-  color: #E0115F;
+  color: #FF3D00;
   border: none;
   background: none;
   cursor: pointer;
@@ -183,7 +186,7 @@ body {
 .bottom-nav-button {
   @apply flex flex-col items-center justify-center p-2 active:scale-90 transition-transform;
   filter: drop-shadow(-1.5px -0.5px 0 #00F2EA) drop-shadow(1.5px 0.5px 0 #FF0050);
-  color: #E0115F;
+  color: #FF3D00;
   background-color: transparent;
   border: none;
   cursor: pointer;

@@ -66,7 +66,7 @@ export const SongList: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                                 className={clsx(
                                     "w-full flex flex-col items-start rounded-lg p-3 text-left transition mb-1",
                                     currentSong?.id === song.id
-                                        ? "bg-[#E0115F]/20 text-[#E0115F] tiktok-layer-ruby border border-[#E0115F]/30"
+                                        ? "bg-[#FF3D00]/20 text-[#FF3D00] tiktok-layer-ruby border border-[#FF3D00]/30"
                                         : "text-zinc-300 hover:bg-zinc-800"
                                 )}
                             >
@@ -87,7 +87,7 @@ export const SongList: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                                         className={clsx(
                                             "w-full flex flex-col items-start rounded-lg p-3 text-left transition mb-1",
                                             currentSong?.id === song.id
-                                                ? "bg-[#E0115F]/20 text-[#E0115F] tiktok-layer-ruby border border-[#E0115F]/30"
+                                                ? "bg-[#FF3D00]/20 text-[#FF3D00] tiktok-layer-ruby border border-[#FF3D00]/30"
                                                 : "text-zinc-300 hover:bg-zinc-800"
                                         )}
                                     >
