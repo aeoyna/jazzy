@@ -37,7 +37,7 @@ export default function Home() {
   if (!currentSong) return null;
 
   return (
-    <div className="flex justify-center min-h-screen bg-zinc-900 lg:justify-between w-full relative">
+    <div className="flex justify-center min-h-screen bg-black lg:justify-between w-full relative">
       {/* Left Column (Desktop) */}
       <div className="hidden lg:flex flex-col justify-between h-screen p-12 fixed left-0 top-0 w-80 z-0">
         <div>

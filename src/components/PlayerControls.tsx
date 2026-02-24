@@ -30,7 +30,7 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({ song, onEditClic
 
             {/* Disc Button (Placeholder) */}
             <button className="player-controls-button" title="Backing Options">
-                <Disc size={32} strokeWidth={2.5} fill="rgba(6,182,212,0.2)" />
+                <Disc size={32} strokeWidth={2.5} fill="rgba(251,191,36,0.1)" />
             </button>
         </div>
     );

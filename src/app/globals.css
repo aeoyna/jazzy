@@ -118,8 +118,8 @@ body {
 
 .player-controls-button {
   @apply transition opacity-90;
-  color: #22d3ee;
-  /* Icon Color: Cyan-400 */
+  color: #fbbf24;
+  /* Icon Color: Amber-400 (Gold) */
   border: none;
   background: none;
   cursor: pointer;
@@ -127,8 +127,8 @@ body {
 
 .player-controls-button:hover {
   opacity: 1;
-  color: #67e8f9;
-  /* Hover Color */
+  color: #f59e0b;
+  /* Amber-500 */
 }
 
 .player-mid-container {
@@ -165,8 +165,8 @@ body {
 
 .bottom-nav-button {
   @apply flex flex-col items-center justify-center p-2;
-  color: #22d3ee;
-  /* Icon Color */
+  color: #fbbf24;
+  /* Gold Icon Color */
   background-color: transparent;
   border: none;
   cursor: pointer;

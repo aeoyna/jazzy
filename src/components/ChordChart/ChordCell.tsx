@@ -88,7 +88,7 @@ export const ChordCell: React.FC<ChordCellProps> = ({ bar, isActive, index, sect
     return (
         <div
             className={clsx(
-                'flex flex-col w-full border-r border-b border-zinc-500 transition-colors duration-100 relative',
+                'flex flex-col w-full border-r border-b border-zinc-800 transition-colors duration-100 relative',
                 hasMultipleLyrics ? 'h-[6.5rem]' : 'h-[5.5rem]',
                 activeClass
             )}

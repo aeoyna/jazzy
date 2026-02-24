@@ -11,12 +11,12 @@ const SectionGrid: React.FC<{ section: Section; sectionIndex: number; activeBar:
     return (
         <div className="mb-12">
             <div className="flex items-center">
-                <span className="flex h-6 w-6 items-center justify-center bg-zinc-300 font-bold text-black text-sm border border-zinc-500 mb-[-1px] z-10">
+                <span className="flex h-6 w-7 items-center justify-center bg-zinc-800 font-bold text-amber-500 text-xs border border-zinc-700 mb-[-1px] z-10 rounded-t-sm uppercase tracking-wider">
                     {section.label}
                 </span>
             </div>
 
-            <div className="grid grid-cols-4 border-l border-t border-zinc-500 bg-zinc-950">
+            <div className="grid grid-cols-4 border-l border-t border-zinc-800 bg-zinc-950">
                 {section.bars.map((bar, idx) => {
                     const isActive = activeBar?.sectionIndex === sectionIndex && activeBar?.barIndex === idx;
                     return (

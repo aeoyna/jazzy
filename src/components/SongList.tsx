@@ -26,7 +26,7 @@ export const SongList: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={onClose}>
                 <div
                     className={clsx(
-                        "bg-red-900 border border-red-800 rounded-lg w-11/12 max-w-md max-h-[80vh] flex flex-col shadow-2xl transition-transform duration-75",
+                        "bg-zinc-950 border border-zinc-800 rounded-lg w-11/12 max-w-md max-h-[80vh] flex flex-col shadow-2xl transition-transform duration-75",
                         isDragging ? "cursor-grabbing" : ""
                     )}
                     style={{
@@ -36,7 +36,7 @@ export const SongList: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                     onClick={e => e.stopPropagation()}
                 >
                     <div
-                        className="flex justify-between items-center p-4 border-b border-red-800 cursor-grab active:cursor-grabbing select-none"
+                        className="flex justify-between items-center p-4 border-b border-zinc-800 cursor-grab active:cursor-grabbing select-none"
                         onMouseDown={handleMouseDown}
                     >
                         <h2 className="text-xl font-bold text-white flex items-center gap-2 pointer-events-none">
@@ -66,7 +66,7 @@ export const SongList: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                                 className={clsx(
                                     "w-full flex flex-col items-start rounded-lg p-3 text-left transition mb-1",
                                     currentSong?.id === song.id
-                                        ? "bg-cyan-900/30 text-cyan-400 border border-cyan-700/50"
+                                        ? "bg-amber-900/20 text-amber-500 border border-amber-600/30"
                                         : "text-zinc-300 hover:bg-zinc-800"
                                 )}
                             >
@@ -87,7 +87,7 @@ export const SongList: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                                         className={clsx(
                                             "w-full flex flex-col items-start rounded-lg p-3 text-left transition mb-1",
                                             currentSong?.id === song.id
-                                                ? "bg-cyan-900/30 text-cyan-400 border border-cyan-700/50"
+                                                ? "bg-amber-900/20 text-amber-500 border border-amber-600/30"
                                                 : "text-zinc-300 hover:bg-zinc-800"
                                         )}
                                     >
