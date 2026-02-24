@@ -118,8 +118,8 @@ body {
 
 .player-controls-button {
   @apply transition opacity-90;
-  color: #fbbf24;
-  /* Icon Color: Amber-400 (Gold) */
+  color: #FFD700;
+  /* Premium Gold */
   border: none;
   background: none;
   cursor: pointer;
@@ -127,8 +127,8 @@ body {
 
 .player-controls-button:hover {
   opacity: 1;
-  color: #f59e0b;
-  /* Amber-500 */
+  color: #FFF200;
+  /* Bright Gold */
 }
 
 .player-mid-container {
@@ -165,8 +165,8 @@ body {
 
 .bottom-nav-button {
   @apply flex flex-col items-center justify-center p-2;
-  color: #fbbf24;
-  /* Gold Icon Color */
+  color: #FFD700;
+  /* Premium Gold Icon */
   background-color: transparent;
   border: none;
   cursor: pointer;
