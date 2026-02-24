@@ -259,7 +259,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
                             <div className="w-20 h-20 bg-gradient-to-br from-amber-500 to-orange-600 rounded-3xl mx-auto flex items-center justify-center shadow-xl mb-6 rotate-3">
                                 <Music size={40} className="text-white" />
                             </div>
-                            <h3 className="text-2xl font-bold text-white mb-2">Jazzy</h3>
+                            <h3 className="text-2xl font-bold text-white mb-2">The Session</h3>
                             <p className="text-zinc-400 text-sm mb-8">
                                 The ultimate jazz practice companion.
                             </p>
