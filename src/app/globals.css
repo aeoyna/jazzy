@@ -7,13 +7,11 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #050505;
+    --background: #020202;
     --foreground: #ffffff;
-    --accent: #FF3D00;
-    /* Vibrant Red from Logo */
-    --accent-glow: rgba(255, 61, 0, 0.4);
-    --logo-orange: #FFB700;
-    --logo-purple: #780050;
+    --accent: #C70039;
+    /* Deep Elegant Ruby */
+    --accent-glow: rgba(199, 0, 57, 0.3);
   }
 }
 
@@ -138,9 +136,9 @@ body {
 }
 
 .player-controls-button {
-  @apply transition opacity-95 active:scale-95;
-  filter: drop-shadow(-1px -1px 0 #00F2EA) drop-shadow(1px 1px 0 #FF0050);
-  color: #FF3D00;
+  @apply transition opacity-90 active:scale-95 hover:opacity-100;
+  filter: drop-shadow(-0.5px -0.5px 0 rgba(0, 242, 234, 0.5)) drop-shadow(0.5px 0.5px 0 rgba(255, 0, 80, 0.5));
+  color: #C70039;
   border: none;
   background: none;
   cursor: pointer;
@@ -184,9 +182,9 @@ body {
 }
 
 .bottom-nav-button {
-  @apply flex flex-col items-center justify-center p-2 active:scale-90 transition-transform;
-  filter: drop-shadow(-1.5px -0.5px 0 #00F2EA) drop-shadow(1.5px 0.5px 0 #FF0050);
-  color: #FF3D00;
+  @apply flex flex-col items-center justify-center p-2 active:scale-90 transition-transform opacity-90 hover:opacity-100;
+  filter: drop-shadow(-1px -0.5px 0 rgba(0, 242, 234, 0.4)) drop-shadow(1px 0.5px 0 rgba(255, 0, 80, 0.4));
+  color: #C70039;
   background-color: transparent;
   border: none;
   cursor: pointer;

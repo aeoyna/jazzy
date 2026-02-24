@@ -38,13 +38,13 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
             onClick={() => setActiveTab(id)}
             className={clsx(
                 "flex items-center gap-2 px-4 py-3 text-sm font-medium transition-all relative",
-                activeTab === id ? "text-[#FF3D00]" : "text-zinc-400 hover:text-zinc-200"
+                activeTab === id ? "text-[#C70039]" : "text-zinc-400 hover:text-zinc-200"
             )}
         >
             <Icon size={16} />
             {label}
             {activeTab === id && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#FF3D00] shadow-[0_0_8px_rgba(224,17,95,0.5)]" />
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#C70039] shadow-[0_0_8px_rgba(224,17,95,0.5)]" />
             )}
         </button>
     );
@@ -68,7 +68,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
                     onMouseDown={handleMouseDown}
                 >
                     <h2 className="text-lg font-semibold text-white flex items-center gap-2 pointer-events-none">
-                        <SettingsIcon size={20} className="text-[#FF3D00]" />
+                        <SettingsIcon size={20} className="text-[#C70039]" />
                         Settings
                     </h2>
                     <div className="flex gap-2">
@@ -101,7 +101,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
                                 <div className="bg-zinc-900 rounded-xl p-5 border border-zinc-800">
                                     <div className="flex justify-between items-center mb-4">
                                         <div className="text-sm text-zinc-300">Transpose</div>
-                                        <div className="text-xs px-2 py-1 rounded bg-black/30 text-[#FF3D00] font-mono border border-amber-500/20">
+                                        <div className="text-xs px-2 py-1 rounded bg-black/30 text-[#C70039] font-mono border border-amber-500/20">
                                             Original: {currentSong?.defaultKey || 'C'}
                                         </div>
                                     </div>
@@ -109,7 +109,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
                                     <div className="flex items-center justify-between gap-4">
                                         <button
                                             onClick={() => setTranspose(transpose - 1)}
-                                            className="w-12 h-12 flex items-center justify-center rounded-xl bg-black/20 hover:bg-amber-500/20 hover:text-[#FF3D00] border border-white/10 hover:border-amber-500/50 transition-all active:scale-95"
+                                            className="w-12 h-12 flex items-center justify-center rounded-xl bg-black/20 hover:bg-amber-500/20 hover:text-[#C70039] border border-white/10 hover:border-amber-500/50 transition-all active:scale-95"
                                         >
                                             <span className="text-xl font-medium">-</span>
                                         </button>
@@ -123,7 +123,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
 
                                         <button
                                             onClick={() => setTranspose(transpose + 1)}
-                                            className="w-12 h-12 flex items-center justify-center rounded-xl bg-black/20 hover:bg-amber-500/20 hover:text-[#FF3D00] border border-white/10 hover:border-amber-500/50 transition-all active:scale-95"
+                                            className="w-12 h-12 flex items-center justify-center rounded-xl bg-black/20 hover:bg-amber-500/20 hover:text-[#C70039] border border-white/10 hover:border-amber-500/50 transition-all active:scale-95"
                                         >
                                             <span className="text-xl font-medium">+</span>
                                         </button>
@@ -139,7 +139,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
                                 <div className="mb-6">
                                     <div className="flex justify-between mb-2">
                                         <label className="text-sm text-zinc-300">Font Size</label>
-                                        <span className="text-sm text-[#FF3D00] font-mono">{fontSize}pt</span>
+                                        <span className="text-sm text-[#C70039] font-mono">{fontSize}pt</span>
                                     </div>
                                     <input
                                         type="range"
@@ -218,7 +218,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
                                     </div>
                                     <div className={clsx(
                                         "w-11 h-6 rounded-full transition-colors relative",
-                                        useGermanB ? "bg-[#FF3D00]" : "bg-zinc-700"
+                                        useGermanB ? "bg-[#C70039]" : "bg-zinc-700"
                                     )}>
                                         <div className={clsx(
                                             "absolute top-1 left-1 bg-white w-4 h-4 rounded-full transition-transform shadow-sm",
@@ -241,7 +241,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
                                     </div>
                                     <div className={clsx(
                                         "w-11 h-6 rounded-full transition-colors relative",
-                                        highlightingEnabled ? "bg-[#FF3D00]" : "bg-zinc-700"
+                                        highlightingEnabled ? "bg-[#C70039]" : "bg-zinc-700"
                                     )}>
                                         <div className={clsx(
                                             "absolute top-1 left-1 bg-white w-4 h-4 rounded-full transition-transform shadow-sm",

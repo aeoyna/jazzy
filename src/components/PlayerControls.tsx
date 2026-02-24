@@ -21,7 +21,7 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({ song, onEditClic
                 className="player-mid-container cursor-pointer hover:bg-zinc-800/50 rounded-lg p-1 transition-colors group"
                 onClick={onTitleClick}
             >
-                <h2 className="player-title group-hover:text-[#FF3D00] transition-colors">{song.title}</h2>
+                <h2 className="player-title group-hover:text-[#C70039] transition-colors">{song.title}</h2>
                 <p className="player-title-sub">
                     {song.composer}
                     {song.arranger && <span className="text-zinc-500 ml-1">/ Arr: {song.arranger}</span>}
