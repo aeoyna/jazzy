@@ -256,8 +256,8 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
 
                     {activeTab === 'about' && (
                         <div className="animate-in slide-in-from-right-4 duration-300 fade-in text-center py-8">
-                            <div className="w-20 h-20 bg-gradient-to-br from-amber-500 to-orange-600 rounded-3xl mx-auto flex items-center justify-center shadow-xl mb-6 rotate-3">
-                                <Music size={40} className="text-white" />
+                            <div className="w-20 h-20 mx-auto mb-6 rotate-3">
+                                <img src="/logo.png" alt="session logo" className="w-full h-full object-contain drop-shadow-2xl" />
                             </div>
                             <h3 className="text-2xl font-bold text-white mb-2">session</h3>
                             <p className="text-zinc-400 text-sm mb-8">

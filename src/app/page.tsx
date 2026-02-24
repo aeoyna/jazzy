@@ -44,10 +44,7 @@ export default function Home() {
           <h1 className="text-white text-5xl font-bold tracking-tighter">session</h1>
         </div>
         <div className="mb-12">
-          {/* Logo Placeholder */}
-          <div className="w-32 h-32 bg-zinc-800 rounded-full flex items-center justify-center text-zinc-500 border border-zinc-700">
-            <span className="text-xs">Logo</span>
-          </div>
+          <img src="/logo.png" alt="session logo" className="w-32 h-32 object-contain" />
         </div>
       </div>
 
