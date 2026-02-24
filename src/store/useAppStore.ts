@@ -109,7 +109,7 @@ export const useAppStore = create<AppState>((set) => ({
     userProfile: {
         displayName: 'Nishino Koki',
         handle: 'koki_nishino_jazz',
-        bio: 'The Session - ジャズの演奏とコード進行の研究。セッション参加記録など。',
+        bio: 'session - ジャズの演奏とコード進行の研究。セッション参加記録など。',
     },
 
     setSong: (song) => set({ currentSong: song, tempo: song.defaultTempo, activeBar: null }),

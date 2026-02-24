@@ -41,7 +41,7 @@ export default function Home() {
       {/* Left Column (Desktop) */}
       <div className="hidden lg:flex flex-col justify-between h-screen p-12 fixed left-0 top-0 w-80 z-0">
         <div>
-          <h1 className="text-white text-5xl font-bold tracking-tighter">The Session</h1>
+          <h1 className="text-white text-5xl font-bold tracking-tighter">session</h1>
         </div>
         <div className="mb-12">
           {/* Logo Placeholder */}
