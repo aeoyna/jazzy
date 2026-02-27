@@ -31,5 +31,6 @@ export interface Song {
     style: string; // "Swing", "Bossa", "Ballad"
     defaultKey: KeySignature;
     defaultTempo: number;
+    songTag?: string; // Licensed song tag (e.g., "Autumn Leaves / Joseph Kosma")
     sections: Section[];
 }

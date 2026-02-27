@@ -48,14 +48,14 @@ export const SongInfoModal: React.FC<SongInfoModalProps> = ({ song, onClose }) =
 
 
     return (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-fade-in text-white font-sans" onClick={onClose}>
-            <div className="w-full max-w-sm bg-zinc-900 border border-zinc-800 rounded-2xl shadow-2xl flex flex-col relative animate-slide-up" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-fade-in text-[var(--app-fg)] font-sans" onClick={onClose}>
+            <div className="w-full max-w-sm bg-[var(--app-surface-elevated)] border border-[var(--app-border)] rounded-3xl shadow-2xl flex flex-col relative animate-slide-up" onClick={(e) => e.stopPropagation()}>
 
                 {/* Header */}
-                <header className="flex items-center justify-between px-4 py-3 border-b border-zinc-800">
+                <header className="flex items-center justify-between px-4 py-3 border-b border-[var(--app-border)]">
                     <div className="flex items-center gap-2">
-                        <Info className="w-5 h-5 text-red-500" />
-                        <h2 className="font-bold text-[17px] tracking-wide text-zinc-100">曲の詳細 Info</h2>
+                        <Info className="w-5 h-5 text-[var(--jam-red)]" />
+                        <h2 className="font-bold text-[17px] tracking-wide text-[var(--app-fg)]">曲の詳細 Info</h2>
                     </div>
                     <button onClick={onClose} className="p-2 -mr-2 text-zinc-400 hover:text-white transition-colors">
                         <X size={24} />
@@ -66,7 +66,7 @@ export const SongInfoModal: React.FC<SongInfoModalProps> = ({ song, onClose }) =
                 <div className="p-5 flex flex-col gap-5">
                     <div>
                         <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider mb-1">曲名 Title</div>
-                        <div className="text-[17px] font-medium text-zinc-100">{song.title}</div>
+                        <div className="text-[17px] font-medium text-[var(--app-fg)]">{song.title}</div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
@@ -117,7 +117,7 @@ export const SongInfoModal: React.FC<SongInfoModalProps> = ({ song, onClose }) =
                 </div>
 
                 {/* Action Footer */}
-                <div className="p-4 border-t border-zinc-800 flex justify-end gap-3">
+                <div className="p-4 border-t border-[var(--app-border)] flex justify-end gap-3">
                     <button
                         onClick={onClose}
                         className="px-4 py-2 text-zinc-400 hover:text-white font-medium transition-colors text-sm"
@@ -126,7 +126,7 @@ export const SongInfoModal: React.FC<SongInfoModalProps> = ({ song, onClose }) =
                     </button>
                     <button
                         onClick={handleApply}
-                        className="px-6 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg font-bold transition-colors text-sm"
+                        className="px-6 py-2 bg-[var(--jam-red)] hover:bg-[var(--jam-red-hover)] text-white rounded-full font-bold transition-colors text-sm"
                     >
                         完了
                     </button>

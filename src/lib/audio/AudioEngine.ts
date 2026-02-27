@@ -1,6 +1,7 @@
 import * as Tone from 'tone';
 import { Song, Section, Bar } from '@/types/song';
 import { getChordNotes, getBassNote } from '../music-theory/chords';
+import { useAppStore } from '@/store/useAppStore';
 
 export class AudioEngine {
     private static instance: AudioEngine;
@@ -21,6 +22,10 @@ export class AudioEngine {
     private gate: Tone.Gate;
 
     private constructor() {
+        // Initialize context if not exists to avoid early access errors
+        if (!Tone.context) {
+            Tone.setContext(new Tone.Context());
+        }
         this.masterGain = new Tone.Gain(1).toDestination();
         this.reverb = new Tone.Freeverb({ roomSize: 0.6, dampening: 4000 }).connect(this.masterGain);
         this.reverb.wet.value = 0.2; // 20% Reverb
@@ -53,55 +58,56 @@ export class AudioEngine {
                 "F1": "f1-3.wav",
                 "G1": "g1-3.wav",
                 "A1": "a3.wav",
-                "A#1": "b1-3.wav",
+                "Ab1": "ab1.wav", // Added more mappings
+                "Bb1": "b1-3.wav",
                 "C2": "c1-3.wav",
                 "D2": "d1-3.wav",
-                "D#2": "eb3.wav",
+                "Eb2": "eb3.wav",
                 "F2": "f2-3.wav",
                 "G2": "g2-3.wav",
-                "G#2": "ab3.wav",
-                "A#2": "b2-3.wav",
+                "Ab2": "ab3.wav",
+                "Bb2": "b2-3.wav",
                 "C3": "c2-3.wav",
                 "D3": "d2-3.wav",
                 "E3": "e2-3.wav"
             },
             baseUrl: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/samples/bass/mybass/samples/`,
-            volume: 12, // Boosted volume further
+            volume: 0,
         }).connect(this.bassEQ);
 
         this.drums = new Tone.MembraneSynth({
-            pitchDecay: 0.05,
-            octaves: 4,
+            pitchDecay: 0.02,
+            octaves: 6,
             oscillator: { type: 'sine' },
-            envelope: { attack: 0.001, decay: 0.4, sustain: 0.01, release: 1.4, attackCurve: 'exponential' },
+            envelope: { attack: 0.001, decay: 0.2, sustain: 0, release: 1.2, attackCurve: 'exponential' },
             volume: -8,
         }).connect(this.reverb);
 
         this.cymbal = new Tone.MetalSynth({
-            envelope: { attack: 0.001, decay: 1.2, release: 0.2 },
+            envelope: { attack: 0.001, decay: 0.6, release: 0.1 },
             harmonicity: 5.1,
-            modulationIndex: 32,
-            resonance: 4000,
+            modulationIndex: 40,
+            resonance: 6000,
             octaves: 1.5,
-            volume: -15,
+            volume: -18,
         }).connect(this.reverb);
 
         this.hihat = new Tone.MetalSynth({
-            envelope: { attack: 0.001, decay: 0.07, release: 0.01 },
+            envelope: { attack: 0.001, decay: 0.05, release: 0.01 },
             harmonicity: 5.1,
             modulationIndex: 32,
             resonance: 8000,
             octaves: 1.5,
-            volume: -15,
+            volume: -18,
         }).connect(this.reverb);
 
         // Metronome doesn't go through effects
         this.metronome = new Tone.MembraneSynth({
-            pitchDecay: 0.008,
+            pitchDecay: 0.005,
             octaves: 2,
             envelope: {
-                attack: 0.0006,
-                decay: 0.1,
+                attack: 0.0005,
+                decay: 0.08,
                 sustain: 0,
             },
             volume: -10,
@@ -117,11 +123,31 @@ export class AudioEngine {
 
     public async initialize() {
         if (!this.isInitialized) {
-            await Tone.start();
-            await Tone.loaded(); // Wait for Sampler assets
-            console.log('Tone.js Context Started');
-            this.isInitialized = true;
+            try {
+                await Tone.start();
+                await Tone.loaded();
+                console.log('AudioEngine: Tone.js Context Started and Samples Loaded');
+                this.applyVolumes(); // Initial sync
+                this.isInitialized = true;
+            } catch (error) {
+                console.error('AudioEngine: Initialization failed', error);
+                throw error;
+            }
         }
+    }
+
+    public applyVolumes() {
+        const store = useAppStore.getState();
+        const vols = store.instrumentVolumes;
+
+        this.masterGain.gain.value = Tone.dbToGain(store.masterVolume);
+        this.piano.volume.value = vols.piano;
+        this.bass.volume.value = vols.bass + 6; // Adding a base boost
+        this.drums.volume.value = vols.drums;
+        this.cymbal.volume.value = vols.drums - 10;
+        this.hihat.volume.value = vols.drums - 10;
+        this.metronome.volume.value = vols.metronome;
+        this.reverb.wet.value = store.reverbWet;
     }
 
     public stop() {
@@ -136,17 +162,21 @@ export class AudioEngine {
                 this.piano.volume.value = volume;
                 break;
             case 'bass':
-                this.bass.volume.value = volume;
+                this.bass.volume.value = volume + 6; // Apply boost here too
                 break;
             case 'drums':
                 this.drums.volume.value = volume;
-                this.cymbal.volume.value = volume;
-                this.hihat.volume.value = volume;
+                this.cymbal.volume.value = volume - 10;
+                this.hihat.volume.value = volume - 10;
                 break;
             case 'metronome':
                 this.metronome.volume.value = volume;
                 break;
         }
+    }
+
+    public setMasterVolume(volume: number) {
+        this.masterGain.gain.value = Tone.dbToGain(volume);
     }
 
     public setReverbWet(wet: number) {
@@ -185,8 +215,10 @@ export class AudioEngine {
     public async playSong(song: Song) {
         if (!this.isInitialized) await this.initialize();
 
-        const store = await import('@/store/useAppStore').then(m => m.useAppStore.getState());
+        const store = useAppStore.getState();
         const loopCount = store.loopCount;
+
+        this.applyVolumes(); // Ensure volumes are up to date when playing
 
         this.stop();
         Tone.Transport.bpm.value = store.tempo;
@@ -241,15 +273,25 @@ export class AudioEngine {
         });
 
         const totalIterations = loopCount === 0 ? 1 : loopCount;
-        let globalBarIndex = 0;
+
+        // Track the last played chords to fill in simile marks (%)
+        let lastPlayedChords: string[] = ['C'];
 
         for (let iter = 0; iter < totalIterations; iter++) {
-            flatBars.forEach(bar => {
-                // Fill in empty chords with the last valid chord
-                let effectiveChords = bar.chords.length > 0 ? [...bar.chords] : [lastValidChord];
-                effectiveChords = effectiveChords.map(c => {
-                    if (c === '' || c === undefined) return lastValidChord;
-                    lastValidChord = c; // update memory
+            flatBars.forEach((bar: Bar) => {
+                // If bar contains simile mark %, use chords from the previous bar
+                let barChords = bar.chords;
+                if (barChords.length === 1 && barChords[0] === '%') {
+                    barChords = [...lastPlayedChords];
+                } else if (barChords.length > 0) {
+                    // Update last played chords (ignore empty strings if they are just placeholders)
+                    lastPlayedChords = barChords.filter(c => c !== '');
+                }
+
+                // Fill in empty chords with fallback if necessary
+                let effectiveChords = barChords.length > 0 ? [...barChords] : lastPlayedChords;
+                effectiveChords = effectiveChords.map((c: string) => {
+                    if (c === '' || c === undefined || c === '%') return lastPlayedChords[0] || 'C';
                     return c;
                 });
 
@@ -292,7 +334,7 @@ export class AudioEngine {
 
                 // 1. Chords (Piano Comping)
                 const numChords = effectiveChords.length;
-                effectiveChords.forEach((chord, i) => {
+                effectiveChords.forEach((chord: string, i: number) => {
                     if (chord === 'N.C.') return; // Do not play notes for N.C.
                     const notes = getChordNotes(chord);
                     const split = 4 / numChords;
@@ -313,7 +355,7 @@ export class AudioEngine {
                 });
 
                 // 2. Bass - 4-Beat Walking Bass
-                effectiveChords.forEach((chord, i) => {
+                effectiveChords.forEach((chord: string, i: number) => {
                     if (chord === 'N.C.') return;
                     const split = 4 / numChords;
                     const timeOffset = i * split;

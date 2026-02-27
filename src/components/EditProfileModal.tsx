@@ -24,7 +24,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ onClose }) =
 
     return (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/90 backdrop-blur-sm sm:p-4 animate-fade-in text-white font-sans">
-            <div className="w-full h-full sm:h-auto sm:max-h-[85vh] sm:max-w-md bg-zinc-950 sm:border border-zinc-800 sm:rounded-2xl shadow-2xl flex flex-col relative animate-slide-up">
+            <div className="w-full h-full sm:h-auto sm:max-h-[85vh] sm:max-w-md bg-zinc-950 sm:border border-zinc-800 sm:rounded-3xl shadow-2xl flex flex-col relative animate-slide-up">
 
                 {/* Header */}
                 <header className="flex items-center justify-between px-4 py-3 border-b border-zinc-900 bg-zinc-950 sticky top-0 z-10">

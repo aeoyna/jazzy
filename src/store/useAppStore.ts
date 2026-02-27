@@ -41,6 +41,9 @@ interface AppState {
         avatarUrl?: string; // Optional for now
     };
 
+    theme: 'dark' | 'light';
+    setTheme: (theme: 'dark' | 'light') => void;
+
     // Actions
     setSong: (song: Song) => void;
     updateBarLyrics: (sectionIndex: number, barIndex: number, newLyrics: string) => void;
@@ -94,7 +97,7 @@ export const useAppStore = create<AppState>((set) => ({
     // Default Settings
     fontSize: 18,
     minorDisplay: 'minus',
-    highlightColor: 'Yellow',
+    highlightColor: 'Theme',
     useGermanB: false,
     highlightingEnabled: true, // Enable by default
 
@@ -112,7 +115,10 @@ export const useAppStore = create<AppState>((set) => ({
         bio: 'Jazzyな演奏とコード進行の研究。セッション参加記録など。',
     },
 
+    theme: 'dark',
+
     setSong: (song) => set({ currentSong: song, tempo: song.defaultTempo, activeBar: null }),
+    setTheme: (theme) => set({ theme }),
     updateBarLyrics: (sectionIndex, barIndex, newLyrics) => set((state) => {
         if (!state.currentSong) return state;
 

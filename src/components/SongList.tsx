@@ -23,51 +23,46 @@ export const SongList: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 
     return (
         <>
-            <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={onClose}>
+            <div className="modal-overlay" onClick={onClose}>
                 <div
                     className={clsx(
-                        "bg-red-900 border border-red-800 rounded-lg w-11/12 max-w-md max-h-[80vh] flex flex-col shadow-2xl transition-transform duration-75",
+                        "modal-container w-11/12 max-w-md max-h-[80vh] flex flex-col",
                         isDragging ? "cursor-grabbing" : ""
                     )}
                     style={{
                         transform: `translate(${position.x}px, ${position.y}px)`,
-                        backgroundColor: '#000000'
                     }}
                     onClick={e => e.stopPropagation()}
                 >
                     <div
-                        className="flex justify-between items-center p-4 border-b border-red-800 cursor-grab active:cursor-grabbing select-none"
+                        className="modal-header cursor-grab active:cursor-grabbing select-none"
                         onMouseDown={handleMouseDown}
                     >
-                        <h2 className="text-xl font-bold text-white flex items-center gap-2 pointer-events-none">
-                            Song Library
-                        </h2>
-                        <div className="flex gap-2 items-center">
-                            <GripHorizontal size={20} className="text-zinc-600 mr-2 opacity-50" />
-                            <div onMouseDown={e => e.stopPropagation()}>
-                                <button
-                                    onClick={() => setShowImport(true)}
-                                    className="bg-zinc-800 hover:bg-zinc-700 text-zinc-300 px-3 py-1 rounded text-sm flex items-center gap-1 mr-2"
-                                >
-                                    <Import size={16} /> Import
-                                </button>
-                                <button onClick={onClose} className="text-zinc-400 hover:text-white">
-                                    <X />
-                                </button>
-                            </div>
+                        <h2 className="pointer-events-none">Song Library</h2>
+                        <div className="flex gap-2 items-center" onMouseDown={e => e.stopPropagation()}>
+                            <button
+                                onClick={() => setShowImport(true)}
+                                className="bg-white/5 hover:bg-white/10 text-zinc-300 px-3 py-1.5 rounded-full text-xs flex items-center gap-1 border border-white/10 transition-colors"
+                            >
+                                <Import size={14} /> Import
+                            </button>
+                            <GripHorizontal size={18} className="text-zinc-600 opacity-50 pointer-events-none" />
+                            <button onClick={onClose} className="modal-close">
+                                <X size={18} />
+                            </button>
                         </div>
                     </div>
 
-                    <div className="flex-1 overflow-y-auto p-2">
+                    <div className="flex-1 overflow-y-auto p-3 pt-4">
                         {songLibrary.map((song) => (
                             <button
                                 key={song.id}
                                 onClick={() => handleSelect(song)}
                                 className={clsx(
-                                    "w-full flex flex-col items-start rounded-lg p-3 text-left transition mb-1",
+                                    "w-full flex flex-col items-start rounded-xl p-3 text-left transition mb-1",
                                     currentSong?.id === song.id
-                                        ? "bg-cyan-900/30 text-cyan-400 border border-cyan-700/50"
-                                        : "text-zinc-300 hover:bg-zinc-800"
+                                        ? "border border-[var(--jam-red)]/30 text-[var(--jam-red)]"
+                                        : "text-zinc-300 hover:bg-white/5 border border-transparent"
                                 )}
                             >
                                 <span className="font-bold text-lg">{song.title}</span>

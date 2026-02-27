@@ -81,34 +81,33 @@ export const ImportSongModal: React.FC<ImportSongModalProps> = ({ onClose }) => 
     };
 
     return (
-        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={onClose}>
+        <div className="modal-overlay z-[70]" onClick={onClose}>
             <div
                 className={clsx(
-                    "bg-red-900 border border-red-800 rounded-lg w-11/12 max-w-md p-6 shadow-2xl transition-transform duration-75",
+                    "modal-container w-11/12 max-w-md p-6",
                     isDragging ? "cursor-grabbing" : ""
                 )}
                 style={{
                     transform: `translate(${position.x}px, ${position.y}px)`,
-                    backgroundColor: '#000000'
                 }}
                 onClick={e => e.stopPropagation()}
             >
                 <div
-                    className="flex justify-between items-center mb-4 cursor-grab active:cursor-grabbing select-none"
+                    className="modal-header mb-4 cursor-grab active:cursor-grabbing select-none"
                     onMouseDown={handleMouseDown}
                 >
-                    <h2 className="text-xl font-bold text-white flex items-center gap-2 pointer-events-none">
-                        <Music className="w-5 h-5 text-cyan-400" />
+                    <h2 className="pointer-events-none">
+                        <Music className="w-5 h-5 text-[var(--jam-red)]" />
                         Import Song
                     </h2>
                     <div className="flex items-center gap-2">
-                        <GripHorizontal size={20} className="text-zinc-600 opacity-50" />
+                        <GripHorizontal size={18} className="text-zinc-600 opacity-50" />
                         <button
                             onClick={onClose}
                             onMouseDown={e => e.stopPropagation()}
-                            className="text-zinc-400 hover:text-white"
+                            className="modal-close"
                         >
-                            <X />
+                            <X size={18} />
                         </button>
                     </div>
                 </div>
@@ -121,11 +120,11 @@ export const ImportSongModal: React.FC<ImportSongModalProps> = ({ onClose }) => 
                         onDrop={onDrop}
                         onClick={() => fileInputRef.current?.click()}
                         className={clsx(
-                            "border-2 border-dashed rounded-lg p-8 flex flex-col items-center justify-center cursor-pointer transition-colors",
-                            isDragOver ? "border-cyan-500 bg-cyan-900/20" : "border-zinc-700 hover:border-zinc-500 bg-zinc-900/50"
+                            "border-2 border-dashed rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-colors",
+                            isDragOver ? "border-[var(--jam-red)] bg-[var(--app-active-bg)]" : "border-zinc-700 hover:border-zinc-500 bg-zinc-900/50"
                         )}
                     >
-                        <Upload className={clsx("w-8 h-8 mb-3", isDragOver ? "text-cyan-400" : "text-zinc-500")} />
+                        <Upload className={clsx("w-8 h-8 mb-3", isDragOver ? "text-[var(--jam-red)]" : "text-zinc-500")} />
                         <p className="text-zinc-300 font-medium mb-1">Click or drag HTML file here</p>
                         <p className="text-xs text-zinc-500">Finds irealbook:// links inside the file</p>
                         <input
@@ -149,7 +148,7 @@ export const ImportSongModal: React.FC<ImportSongModalProps> = ({ onClose }) => 
 
                     <div>
                         <textarea
-                            className="w-full bg-zinc-950 border border-zinc-700 rounded p-3 text-zinc-300 font-mono text-xs focus:outline-none focus:border-cyan-500 min-h-[100px]"
+                            className="w-full bg-zinc-950 border border-white/10 rounded-xl p-3 text-zinc-300 font-mono text-xs focus:outline-none focus:border-[var(--jam-red)] min-h-[100px]"
                             placeholder="irealbook://Title=Composer=..."
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
@@ -165,13 +164,13 @@ export const ImportSongModal: React.FC<ImportSongModalProps> = ({ onClose }) => 
                     <div className="flex justify-end gap-2 pt-2">
                         <button
                             onClick={onClose}
-                            className="px-4 py-2 rounded text-zinc-300 hover:bg-zinc-800 transition"
+                            className="px-4 py-2 rounded-full text-zinc-300 hover:bg-white/5 transition border border-white/10"
                         >
                             Cancel
                         </button>
                         <button
                             onClick={handleImportText}
-                            className="px-4 py-2 rounded bg-cyan-600 text-white font-bold hover:bg-cyan-500 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="px-4 py-2 rounded-full bg-[var(--jam-red)] text-white font-bold hover:bg-[var(--jam-red-hover)] transition disabled:opacity-50 disabled:cursor-not-allowed"
                             disabled={!input.trim()}
                         >
                             Import URI

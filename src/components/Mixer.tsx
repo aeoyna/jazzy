@@ -15,31 +15,30 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
     const { position, handleMouseDown, isDragging } = useDraggable();
 
     return (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={onClose}>
+        <div className="modal-overlay" onClick={onClose}>
             <div
                 className={clsx(
-                    "bg-red-900 border border-red-800 rounded-lg p-6 w-80 shadow-2xl transition-transform duration-75",
+                    "modal-container w-80 p-6 flex flex-col",
                     isDragging ? "cursor-grabbing" : ""
                 )}
                 style={{
                     transform: `translate(${position.x}px, ${position.y}px)`,
-                    backgroundColor: '#000000'
                 }}
                 onClick={e => e.stopPropagation()}
             >
                 <div
-                    className="flex justify-between items-center mb-6 cursor-grab active:cursor-grabbing select-none"
+                    className="modal-header cursor-grab active:cursor-grabbing select-none"
                     onMouseDown={handleMouseDown}
                 >
-                    <h2 className="text-xl font-bold text-white pointer-events-none">Mixer</h2>
+                    <h2 className="pointer-events-none">Mixer</h2>
                     <div className="flex items-center gap-2">
-                        <GripHorizontal size={20} className="text-zinc-600 opacity-50" />
+                        <GripHorizontal size={18} className="text-zinc-600 opacity-50" />
                         <button
                             onClick={onClose}
                             onMouseDown={e => e.stopPropagation()}
-                            className="text-zinc-400 hover:text-white"
+                            className="modal-close"
                         >
-                            <X size={24} />
+                            <X size={18} />
                         </button>
                     </div>
                 </div>
@@ -49,7 +48,7 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                     {/* Piano */}
                     <div>
                         <div className="flex justify-between mb-1">
-                            <label className="text-xs font-bold text-red-500 uppercase tracking-wide">Piano</label>
+                            <label className="text-xs font-bold text-[var(--jam-red)] uppercase tracking-wide">Piano</label>
                             <span className="text-xs text-zinc-400">{Math.round(instrumentVolumes.piano + 60)}%</span>
                         </div>
                         <input
@@ -64,14 +63,14 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                                     AudioEngine.getInstance().setInstrumentVolume('piano', vol);
                                 });
                             }}
-                            className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-red-500"
+                            className="w-full h-2 bg-[var(--app-border)] rounded-lg appearance-none cursor-pointer accent-[var(--jam-red)]"
                         />
                     </div>
 
                     {/* Bass */}
                     <div>
                         <div className="flex justify-between mb-1">
-                            <label className="text-xs font-bold text-red-500 uppercase tracking-wide">Bass</label>
+                            <label className="text-xs font-bold text-[var(--jam-red)] uppercase tracking-wide">Bass</label>
                             <span className="text-xs text-zinc-400">{Math.round(instrumentVolumes.bass + 60)}%</span>
                         </div>
                         <input
@@ -86,14 +85,14 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                                     AudioEngine.getInstance().setInstrumentVolume('bass', vol);
                                 });
                             }}
-                            className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-red-500"
+                            className="w-full h-2 bg-[var(--app-border)] rounded-lg appearance-none cursor-pointer accent-[var(--jam-red)]"
                         />
                     </div>
 
                     {/* Drums */}
                     <div>
                         <div className="flex justify-between mb-1">
-                            <label className="text-xs font-bold text-red-500 uppercase tracking-wide">Drums</label>
+                            <label className="text-xs font-bold text-[var(--jam-red)] uppercase tracking-wide">Drums</label>
                             <span className="text-xs text-zinc-400">{Math.round(instrumentVolumes.drums + 60)}%</span>
                         </div>
                         <input
@@ -108,14 +107,14 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                                     AudioEngine.getInstance().setInstrumentVolume('drums', vol);
                                 });
                             }}
-                            className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-red-500"
+                            className="w-full h-2 bg-[var(--app-border)] rounded-lg appearance-none cursor-pointer accent-[var(--jam-red)]"
                         />
                     </div>
 
                     {/* Metronome */}
                     <div>
                         <div className="flex justify-between mb-1">
-                            <label className="text-xs font-bold text-red-500 uppercase tracking-wide">Metronome</label>
+                            <label className="text-xs font-bold text-[var(--jam-red)] uppercase tracking-wide">Metronome</label>
                             <span className="text-xs text-zinc-400">{Math.round(instrumentVolumes.metronome + 60)}%</span>
                         </div>
                         <input
@@ -130,14 +129,14 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                                     AudioEngine.getInstance().setInstrumentVolume('metronome', vol);
                                 });
                             }}
-                            className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-red-500"
+                            className="w-full h-2 bg-[var(--app-border)] rounded-lg appearance-none cursor-pointer accent-[var(--jam-red)]"
                         />
                     </div>
 
                     {/* Reverb */}
                     <div>
                         <div className="flex justify-between mb-1">
-                            <label className="text-xs font-bold text-red-500 uppercase tracking-wide">Reverb</label>
+                            <label className="text-xs font-bold text-[var(--jam-red)] uppercase tracking-wide">Reverb</label>
                             <span className="text-xs text-zinc-400">{Math.round(useAppStore.getState().reverbWet * 100)}%</span>
                         </div>
                         <input
@@ -153,7 +152,7 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                                     AudioEngine.getInstance().setReverbWet(wet);
                                 });
                             }}
-                            className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-red-500"
+                            className="w-full h-2 bg-[var(--app-border)] rounded-lg appearance-none cursor-pointer accent-[var(--jam-red)]"
                         />
                     </div>
                 </div>
@@ -161,7 +160,7 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                 {/* Gate Effect */}
                 <div className="mb-6">
                     <div className="flex justify-between items-center mb-2">
-                        <label className="text-sm font-bold text-red-500 uppercase tracking-wide">Gate Effect</label>
+                        <label className="text-sm font-bold text-[var(--jam-red)] uppercase tracking-wide">Gate Effect</label>
                         <button
                             onClick={() => {
                                 const newEnabled = !useAppStore.getState().gateEnabled;
@@ -172,7 +171,7 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                             }}
                             className={clsx(
                                 "w-10 h-5 rounded-full p-1 transition-colors duration-200 ease-in-out flex shadow-inner",
-                                useAppStore.getState().gateEnabled ? "bg-red-500" : "bg-zinc-700"
+                                useAppStore.getState().gateEnabled ? "bg-[var(--jam-red)]" : "bg-[var(--app-border)]"
                             )}
                         >
                             <div
@@ -201,13 +200,13 @@ export const Mixer: React.FC<MixerProps> = ({ onClose }) => {
                                         AudioEngine.getInstance().setGateParams(useAppStore.getState().gateEnabled, threshold);
                                     });
                                 }}
-                                className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-red-500"
+                                className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-[var(--jam-red)]"
                             />
                         </div>
                     )}
                 </div>
 
-                <p className="text-xs text-zinc-500 text-center mt-6">More settings coming soon...</p>
+                <p className="text-xs text-zinc-500 text-center mt-6">その他の設定は順次追加予定...</p>
             </div>
         </div>
     );

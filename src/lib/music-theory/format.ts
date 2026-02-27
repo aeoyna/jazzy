@@ -1,27 +1,27 @@
-
 export const NOTE_NAMES = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+
 const NOTE_TO_INDEX: Record<string, number> = {
-    'C': 0, 'C#': 1, 'Db': 1, 'D': 2, 'D#': 3, 'Eb': 3, 'E': 4,
-    'F': 5, 'F#': 6, 'Gb': 6, 'G': 7, 'G#': 8, 'Ab': 8, 'A': 9, 'A#': 10, 'Bb': 10, 'B': 11
+    C: 0, 'C#': 1, Db: 1, D: 2, 'D#': 3, Eb: 3, E: 4,
+    F: 5, 'F#': 6, Gb: 6, G: 7, 'G#': 8, Ab: 8, A: 9, 'A#': 10, Bb: 10, B: 11
 };
 
-// Helper to normalize root (e.g. C# -> Db for simplicity in this MVP, or preserve preference?)
-// For MVP we just use the NOTE_NAMES array which is Flat-biased.
-// Real implementation needs Key context.
+function normalizeAccidental(note: string): string {
+    return note
+        .replace(/♭/g, 'b')
+        .replace(/♯/g, '#');
+}
 
 function getNoteIndex(note: string): number {
-    return NOTE_TO_INDEX[note];
+    return NOTE_TO_INDEX[normalizeAccidental(note)];
 }
 
 export function transposeNote(note: string, semitones: number): string {
     const idx = getNoteIndex(note);
-    if (idx === undefined) return note; // Invalid note
+    if (idx === undefined) return note;
 
     let newIdx = (idx + semitones) % 12;
     if (newIdx < 0) newIdx += 12;
-
-    const transposed = NOTE_NAMES[newIdx];
-    return transposed.replace(/b/g, '♭');
+    return NOTE_NAMES[newIdx];
 }
 
 export interface FormatSettings {
@@ -31,83 +31,80 @@ export interface FormatSettings {
 }
 
 export function formatChord(chordSymbol: string, settings: FormatSettings): { root: string, bass: string, superscript: string, subscript: string } {
-    // 1. Parse Chord (Handle slash chords first)
     const [mainChord, bassNote] = chordSymbol.split('/');
-
     const match = mainChord.match(/^([A-G][#b]?)(.*)$/);
-    // If we can't parse it, just return the whole string as the root
+
     if (!match) return { root: chordSymbol, bass: '', superscript: '', subscript: '' };
 
-    let root = match[1].replace(/b/g, '♭');
-    let remainder = match[2];
+    let root = normalizeAccidental(match[1]);
+    const remainder = match[2];
+    let bass = bassNote ? normalizeAccidental(bassNote) : '';
 
-    let bass = '';
-    if (bassNote) {
-        bass = bassNote.replace(/b/g, '♭');
-    }
-
-    // 2. Transpose Root and Bass
     if (settings.transpose !== 0) {
         root = transposeNote(root, settings.transpose);
-        if (bass) {
-            bass = transposeNote(bass, settings.transpose);
-        }
+        if (bass) bass = transposeNote(bass, settings.transpose);
     }
 
-    // 3. Handle German B (H for B only, Bb stays Bb)
     if (settings.useGermanB) {
         if (root === 'B') root = 'H';
         if (bass === 'B') bass = 'H';
     }
 
-    // 4. Parse Quality/Extension for Minor Display
-    // We need to separate the "m" part from the rest?
-    // Regex for minor: starts with 'm' or '-' but NOT 'maj'
-    // 'Cm7' -> m7. 'Cm' -> m. 'C-7' -> -7.
+    const normalized = remainder
+        .replace(/\^/g, 'maj')
+        .replace(/△/g, 'maj')
+        .replace(/Δ/g, 'maj')
+        .replace(/♭/g, 'b')
+        .replace(/♯/g, '#');
+    const lowered = normalized.toLowerCase();
 
-    let displayQuality = remainder;
-
-    // Check if it is minor
-    let isMinor = false;
-    let suffix = remainder;
-
-    if (remainder.startsWith('-')) {
-        isMinor = true;
-        suffix = remainder.substring(1);
-    } else if (remainder.startsWith('m') && !remainder.startsWith('maj')) {
-        isMinor = true;
-        suffix = remainder.substring(1);
-    }
-
-    // Replace 'maj' with '△' and 'b' with '♭'
-    suffix = suffix.replace(/maj/g, '△').replace(/b/g, '♭');
+    // Mapping for rendering symbols
+    const isMajor7 = lowered === 'maj7' || lowered === 'm7' && remainder.includes('△'); // handle cases if any
+    const isHalfDiminished = lowered === 'm7b5' || lowered === '-7b5' || lowered === 'ø' || lowered === 'ø7' || lowered === 'm7(b5)';
+    const isDiminished = lowered === 'dim' || lowered === 'dim7' || lowered === 'o' || lowered === 'o7' || lowered === '°' || lowered === '°7';
 
     let superscript = '';
     let subscript = '';
 
-    // Typical iReal format:
-    // Minor symbol is subscript (if setting dictates, or just regular if '-')
-    // Numbers (7, 9, 11, 13) and alterations (b5, #9) are superscript
-    // 'dim'/'o', 'aug'/'+', 'alt' are superscript
+    if (isMajor7 || normalized === 'maj7') {
+        superscript = '△7';
+        return { root, bass, superscript, subscript };
+    }
 
-    // For simplicity in this view:
-    // If it's minor, the 'm' or '-' is the subscript, and the REST is superscript.
-    // If it's major/dominant, everything goes to superscript.
-    // Except half-diminished (m7b5) usually has 'm' subscript, '7b5' superscript. (or Ø superscript)
+    if (isHalfDiminished) {
+        superscript = 'ø7';
+        return { root, bass, superscript, subscript };
+    }
+
+    if (isDiminished) {
+        superscript = lowered.endsWith('7') ? 'o7' : 'o';
+        return { root, bass, superscript, subscript };
+    }
+
+    let isMinor = false;
+    let suffix = normalized;
+
+    if (normalized.startsWith('-')) {
+        isMinor = true;
+        suffix = normalized.substring(1);
+    } else if (normalized.startsWith('m') && !lowered.startsWith('maj')) {
+        isMinor = true;
+        suffix = normalized.substring(1);
+    }
 
     if (isMinor) {
         switch (settings.minorDisplay) {
-            case 'minus': subscript = '-'; break;
-            case 'm': subscript = 'm'; break;
-            case 'small': subscript = 'm'; break;
+            case 'minus':
+                subscript = '-';
+                break;
+            case 'm':
+            case 'small':
+                subscript = 'm';
+                break;
         }
-        superscript = suffix;
-    } else {
-        // Not minor. 
-        // Example: '△7', '7b9', '13', 'sus4' -> all superscript
-        superscript = suffix;
     }
 
+    superscript = suffix;
     return { root, bass, superscript, subscript };
 }
 

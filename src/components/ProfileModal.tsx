@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
     ChevronDown,
-    MoreHorizontal,
+    Settings,
     X,
     Twitter,
     Bookmark,
@@ -28,7 +28,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose, onSettingsC
     return (
         <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-sm sm:p-4 animate-fade-in text-white font-sans">
             <div
-                className="w-full h-[95vh] sm:h-[80vh] sm:max-w-md bg-zinc-950 border-t sm:border border-zinc-800 rounded-t-3xl sm:rounded-2xl shadow-2xl overflow-hidden flex flex-col relative animate-slide-up"
+                className="w-full h-[95vh] sm:h-[80vh] sm:max-w-md bg-zinc-950 border-t sm:border border-zinc-800 rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col relative animate-slide-up"
             >
                 {/* Drag Handle (Mobile) */}
                 <div className="w-full flex justify-center pt-3 pb-1 sm:hidden">
@@ -50,7 +50,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose, onSettingsC
                         onClick={onSettingsClick || onClose} // Default close or go to settings
                         className="p-2 -mr-2 text-white/90 hover:text-white"
                     >
-                        <MoreHorizontal size={24} />
+                        <Settings size={24} />
                     </button>
                 </header>
 
@@ -62,7 +62,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose, onSettingsC
                         {/* Avatar */}
                         <div className="w-24 h-24 rounded-full bg-zinc-800 border-2 border-zinc-800 overflow-hidden mb-3">
                             {/* Placeholder for real User Avatar */}
-                            <div className="w-full h-full bg-gradient-to-tr from-amber-500 to-orange-400 flex items-center justify-center text-3xl font-bold">
+                            <div className="w-full h-full bg-gradient-to-tr from-[var(--jam-red)] to-[var(--jam-red-hover)] flex items-center justify-center text-3xl font-bold">
                                 K
                             </div>
                         </div>
@@ -94,14 +94,14 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose, onSettingsC
                         <div className="flex items-center gap-2 mb-4 w-full justify-center">
                             <button
                                 onClick={() => setIsEditingProfile(true)}
-                                className="bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 transition-colors text-[15px] font-semibold py-2.5 px-10 rounded-md border border-zinc-700"
+                                className="bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 transition-colors text-[15px] font-semibold py-2.5 px-10 rounded-xl border border-zinc-700"
                             >
                                 プロフィールを編集
                             </button>
-                            <button className="bg-zinc-800 hover:bg-zinc-700 p-2.5 rounded-md border border-zinc-700 transition-colors">
+                            <button className="bg-zinc-800 hover:bg-zinc-700 p-2.5 rounded-xl border border-zinc-700 transition-colors">
                                 <Twitter size={20} className="text-white/90" />
                             </button>
-                            <button className="bg-zinc-800 hover:bg-zinc-700 p-2.5 rounded-md border border-zinc-700 transition-colors">
+                            <button className="bg-zinc-800 hover:bg-zinc-700 p-2.5 rounded-xl border border-zinc-700 transition-colors">
                                 <Bookmark size={20} className="text-white/90" />
                             </button>
                         </div>
@@ -118,17 +118,17 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose, onSettingsC
                         <div className="flex w-full border-b border-zinc-900 sticky top-0 bg-zinc-950 z-10 shrink-0">
                             <button
                                 onClick={() => setActiveTab('scores')}
-                                className={`flex-1 flex justify-center items-center py-3 relative ${activeTab === 'scores' ? 'text-white' : 'text-zinc-600'}`}
+                                className={`flex-1 flex justify-center items-center py-3 relative ${activeTab === 'scores' ? 'text-[var(--jam-red)]' : 'text-zinc-600'}`}
                             >
                                 <FileText size={24} strokeWidth={activeTab === 'scores' ? 2 : 1.5} />
-                                {activeTab === 'scores' && <div className="absolute bottom-0 left-1/4 right-1/4 h-[2px] bg-white rounded-t" />}
+                                {activeTab === 'scores' && <div className="absolute bottom-0 left-1/4 right-1/4 h-[2px] bg-[var(--jam-red)] rounded-t" />}
                             </button>
                             <button
                                 onClick={() => setActiveTab('recordings')}
-                                className={`flex-1 flex justify-center items-center py-3 relative ${activeTab === 'recordings' ? 'text-white' : 'text-zinc-600'}`}
+                                className={`flex-1 flex justify-center items-center py-3 relative ${activeTab === 'recordings' ? 'text-[var(--jam-red)]' : 'text-zinc-600'}`}
                             >
                                 <Mic size={24} strokeWidth={activeTab === 'recordings' ? 2 : 1.5} />
-                                {activeTab === 'recordings' && <div className="absolute bottom-0 left-1/4 right-1/4 h-[2px] bg-white rounded-t" />}
+                                {activeTab === 'recordings' && <div className="absolute bottom-0 left-1/4 right-1/4 h-[2px] bg-[var(--jam-red)] rounded-t" />}
                             </button>
                         </div>
 
@@ -137,7 +137,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose, onSettingsC
                             <button
                                 onClick={() => setActiveSubTab('public')}
                                 className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-[13px] font-semibold transition-colors whitespace-nowrap ${activeSubTab === 'public'
-                                    ? 'bg-zinc-100 text-black'
+                                    ? 'bg-[var(--jam-red)] text-white'
                                     : 'bg-zinc-900 text-zinc-400 hover:text-zinc-200 border border-zinc-800'
                                     }`}
                             >
@@ -146,7 +146,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose, onSettingsC
                             <button
                                 onClick={() => setActiveSubTab('saved')}
                                 className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-[13px] font-semibold transition-colors whitespace-nowrap ${activeSubTab === 'saved'
-                                    ? 'bg-zinc-100 text-black'
+                                    ? 'bg-[var(--jam-red)] text-white'
                                     : 'bg-zinc-900 text-zinc-400 hover:text-zinc-200 border border-zinc-800'
                                     }`}
                             >
@@ -155,7 +155,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose, onSettingsC
                             <button
                                 onClick={() => setActiveSubTab('list')}
                                 className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-[13px] font-semibold transition-colors whitespace-nowrap ${activeSubTab === 'list'
-                                    ? 'bg-zinc-100 text-black'
+                                    ? 'bg-[var(--jam-red)] text-white'
                                     : 'bg-zinc-900 text-zinc-400 hover:text-zinc-200 border border-zinc-800'
                                     }`}
                             >
@@ -177,7 +177,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose, onSettingsC
                                         </p>
                                         <button
                                             onClick={onClose}
-                                            className="bg-amber-500 hover:bg-amber-400 active:bg-amber-600 text-zinc-950 font-bold text-[15px] py-2.5 px-8 rounded-full flex items-center justify-center mx-auto transition-all shadow-md"
+                                            className="bg-[var(--jam-red)] hover:bg-[var(--jam-red-hover)] active:bg-[var(--jam-red-dark)] text-white font-bold text-[15px] py-2.5 px-8 rounded-full flex items-center justify-center mx-auto transition-all shadow-md"
                                         >
                                             楽譜を探す
                                         </button>
@@ -191,14 +191,14 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose, onSettingsC
                                                 className="w-full text-left bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 p-4 rounded-xl transition-colors flex justify-between items-center group shadow-sm"
                                             >
                                                 <div>
-                                                    <h4 className="text-zinc-100 font-bold text-[16px] mb-1 group-hover:text-amber-500 transition-colors">{score.title}</h4>
+                                                    <h4 className="text-zinc-100 font-bold text-[16px] mb-1 group-hover:text-[var(--jam-red)] transition-colors">{score.title}</h4>
                                                     <div className="flex gap-2 text-zinc-500 text-[13px] font-medium">
                                                         <span>{score.style || 'スタイル無し'}</span>
                                                         <span>•</span>
                                                         <span>Key: {score.defaultKey || '?'}</span>
                                                     </div>
                                                 </div>
-                                                <FileText size={20} className="text-zinc-600 group-hover:text-amber-500 transition-colors" />
+                                                <FileText size={20} className="text-zinc-600 group-hover:text-[var(--jam-red)] transition-colors" />
                                             </button>
                                         ))}
                                     </div>

@@ -9,9 +9,10 @@ interface ChordCellProps {
     isActive?: boolean;
     index: number;
     sectionIndex: number;
+    isLastInBlock?: boolean;
 }
 
-export const ChordCell: React.FC<ChordCellProps> = ({ bar, isActive, index, sectionIndex }) => {
+export const ChordCell: React.FC<ChordCellProps> = ({ bar, isActive, index, sectionIndex, isLastInBlock }) => {
     const {
         transpose,
         fontSize,
@@ -27,24 +28,12 @@ export const ChordCell: React.FC<ChordCellProps> = ({ bar, isActive, index, sect
     // We want the grid to show empty subdivisions if there are multiple chords, some empty
     const visibleChords = chords.length > 0 ? chords : [];
 
-    // Highlight Color Map
-    const getHighlightClass = () => {
-        if (!isActive || !highlightingEnabled) return '';
-        switch (highlightColor) {
-            case 'Yellow': return 'bg-yellow-300/50 border-yellow-300';
-            case 'Green': return 'bg-green-600/50 border-green-500';
-            case 'Blue': return 'bg-blue-600/50 border-blue-500';
-            case 'Pink': return 'bg-pink-600/50 border-pink-500';
-            case 'Orange': return 'bg-orange-600/50 border-orange-500';
-            default: return 'bg-red-500/50 border-red-500';
-        }
-    };
-
-    // If highlighting is disabled, we might still want a subtle indication of position? 
-    // Default was 'bg-amber-900/30'.
+    // Active class using ring for rounded highlighting
     const activeClass = isActive
-        ? (highlightingEnabled ? getHighlightClass() + ' border-2' : 'bg-zinc-800')
-        : 'bg-zinc-950';
+        ? (highlightingEnabled
+            ? 'bg-[var(--app-active-bg)] z-10'
+            : 'bg-[var(--app-surface-elevated)] z-10')
+        : 'bg-transparent hover:bg-white/5';
 
     const lyricsLines = bar.lyrics ? bar.lyrics.split('/').map(l => l.trim()) : [];
     const hasMultipleLyrics = lyricsLines.length > 1;
@@ -87,14 +76,19 @@ export const ChordCell: React.FC<ChordCellProps> = ({ bar, isActive, index, sect
 
     return (
         <div
+            data-active-cell={isActive ? "true" : undefined}
             className={clsx(
-                'flex flex-col w-full border-r border-b border-zinc-500 transition-colors duration-100 relative',
-                hasMultipleLyrics ? 'h-[6.5rem]' : 'h-[5.5rem]',
+                'flex flex-col w-full transition-all duration-300 relative',
+                !isLastInBlock && 'border-r border-white/10',
+                hasMultipleLyrics ? 'h-[4.6rem]' : 'h-16',
                 activeClass
             )}
         >
+            {isActive && highlightingEnabled && (
+                <div className="absolute inset-0 ring-2 ring-inset ring-[var(--app-active-border)] shadow-[inset_0_0_10px_rgba(255,51,102,0.2)] pointer-events-none z-20" />
+            )}
             {/* Chords Area */}
-            <div className="flex-1 relative flex w-full items-center justify-around px-1">
+            <div className="flex-1 relative flex w-full items-center justify-around px-2">
                 {/* Repeat Start: ||: */}
                 {bar.repeatStart && (
                     <div className="absolute left-0 inset-y-0 flex items-center z-10">
@@ -118,18 +112,19 @@ export const ChordCell: React.FC<ChordCellProps> = ({ bar, isActive, index, sect
                     </div>
                 )}
 
-                {/* Visual divider for multiple chords */}
-                {visibleChords.length > 1 && (
-                    <div className="absolute inset-0 flex">
-                        {visibleChords.map((_, i) => i > 0 && (
-                            <div key={i} className="h-full w-[1px] bg-zinc-500 flex-1" style={{ marginLeft: `${(100 / visibleChords.length) * i}%`, position: 'absolute' }} />
-                        ))}
-                    </div>
-                )}
+
 
                 {/* Chords Rendering */}
                 <div className="flex w-full h-full items-center justify-around px-1">
-                    {visibleChords.length === 0 || visibleChords.every(c => c === '') ? (
+                    {visibleChords.some(c => c === '%') ? (
+                        <div className="flex w-full h-full items-center justify-center text-[var(--app-chord-txt)]">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-80">
+                                <circle cx="14" cy="14" r="3" fill="currentColor" />
+                                <circle cx="26" cy="26" r="3" fill="currentColor" />
+                                <line x1="12" y1="28" x2="28" y2="12" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+                            </svg>
+                        </div>
+                    ) : visibleChords.length === 0 || visibleChords.every(c => c === '') ? (
                         <div className="flex w-full h-full items-center justify-center text-zinc-500/40">
                             <svg width="36" height="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="12" cy="12" r="3.5" fill="currentColor" />
@@ -142,17 +137,19 @@ export const ChordCell: React.FC<ChordCellProps> = ({ bar, isActive, index, sect
                             const { root, bass, superscript, subscript } = formatChord(chord, { transpose, minorDisplay, useGermanB });
 
                             // Extract accidentals from root and bass to render as superscript
-                            const rootMatch = root.match(/^([A-H])([#♭]?)(.*)$/);
+                            const rootMatch = root.match(/^([A-H])([#b♭]?)(.*)$/);
                             const rootBase = rootMatch ? rootMatch[1] : root;
-                            const rootAcc = rootMatch ? rootMatch[2] : '';
+                            const rootAccRaw = rootMatch ? rootMatch[2] : '';
+                            const rootAcc = rootAccRaw === 'b' ? '♭' : rootAccRaw === '#' ? '♯' : rootAccRaw;
 
-                            const bassMatch = bass ? bass.match(/^([A-H])([#♭]?)(.*)$/) : null;
+                            const bassMatch = bass ? bass.match(/^([A-H])([#b♭]?)(.*)$/) : null;
                             const bassBase = bassMatch ? bassMatch[1] : bass;
-                            const bassAcc = bassMatch ? bassMatch[2] : '';
+                            const bassAccRaw = bassMatch ? bassMatch[2] : '';
+                            const bassAcc = bassAccRaw === 'b' ? '♭' : bassAccRaw === '#' ? '♯' : bassAccRaw;
 
                             return (
                                 <div key={idx} className="flex-1 flex justify-center items-center h-full">
-                                    <div className="flex items-baseline font-bold text-white transition-all whitespace-nowrap">
+                                    <div className="flex items-baseline font-bold text-[var(--app-chord-txt)] transition-all whitespace-nowrap">
                                         {/* Root Note - Largest */}
                                         <span style={{ fontSize: `${fontSize}pt` }} className="tracking-tight leading-none">
                                             {rootBase}
@@ -181,11 +178,12 @@ export const ChordCell: React.FC<ChordCellProps> = ({ bar, isActive, index, sect
                                             >
                                                 {superscript.split(/(\d+)/).map((part, i) => {
                                                     if (/\d/.test(part)) {
-                                                        // Making numbers even larger and sitting firmly on the baseline
-                                                        return <span key={i} style={{ fontSize: '1.65em' }} className="font-bold">{part}</span>;
+                                                        // Making numbers slightly smaller (70% of previous 1.65em is ~1.15em)
+                                                        return <span key={i} style={{ fontSize: '1.15em' }} className="font-bold">{part}</span>;
                                                     }
-                                                    // For text parts like △ or ♭ or sus, keep them smaller but aligned
-                                                    return <span key={i}>{part}</span>;
+                                                    // For text parts like △ or b or #, use proper symbols
+                                                    const displayPart = part === 'b' ? '♭' : part === '#' ? '♯' : part;
+                                                    return <span key={i}>{displayPart}</span>;
                                                 })}
                                             </span>
                                         )}
@@ -212,9 +210,9 @@ export const ChordCell: React.FC<ChordCellProps> = ({ bar, isActive, index, sect
             <div
                 onClick={handleLyricsClick}
                 className={clsx(
-                    "w-full border-t border-zinc-600/50 flex flex-col justify-center px-1.5 overflow-hidden shrink-0 cursor-text transition-colors group",
+                    "w-full border-t border-[var(--app-border)] flex flex-col justify-center px-1.5 overflow-hidden shrink-0 cursor-text transition-colors group",
                     hasMultipleLyrics && !isEditing ? "h-[32px] py-0.5 space-y-[1px]" : "h-[18px]",
-                    isEditing ? "bg-red-900/40 border-red-500/50" : "bg-zinc-950/40 hover:bg-zinc-800/60"
+                    isEditing ? "bg-[var(--jam-red-dark)]/40 border-[var(--jam-red)]/50" : "bg-[var(--app-bg)]/40 hover:bg-[var(--app-surface-elevated)]"
                 )}
             >
                 {isEditing ? (
@@ -225,7 +223,7 @@ export const ChordCell: React.FC<ChordCellProps> = ({ bar, isActive, index, sect
                         onChange={(e) => setEditValue(e.target.value)}
                         onBlur={handleSaveLyrics}
                         onKeyDown={handleKeyDown}
-                        className="w-full bg-transparent text-[10.5px] font-medium text-red-200 outline-none font-sans tracking-wide leading-none"
+                        className="w-full bg-transparent text-[10.5px] font-medium text-[var(--jam-red)] outline-none font-sans tracking-wide leading-none"
                         placeholder="Lyrics... (use / for multiple lines)"
                     />
                 ) : (

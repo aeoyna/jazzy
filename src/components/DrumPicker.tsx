@@ -108,7 +108,7 @@ export function DrumPicker<T extends string | number>({
             <div className="relative h-[120px] overflow-hidden rounded-xl bg-zinc-900 border border-zinc-800">
                 {/* Selection Highlight */}
                 <div
-                    className="absolute top-1/2 left-0 right-0 -translate-y-1/2 bg-zinc-800/80 border-y border-amber-500/30 pointer-events-none z-10"
+                    className="absolute top-1/2 left-0 right-0 -translate-y-1/2 bg-zinc-800/80 border-y border-[var(--jam-red)]/30 pointer-events-none z-10"
                     style={{ height: itemHeight }}
                 />
 
@@ -137,7 +137,7 @@ export function DrumPicker<T extends string | number>({
                                 key={`${i}-${opt}`}
                                 className={clsx(
                                     "flex items-center justify-center w-full snap-center transition-all duration-200 select-none",
-                                    isSelected ? "text-amber-400 font-bold" : "text-zinc-400 font-medium"
+                                    isSelected ? "text-[var(--jam-red)] font-bold" : "text-zinc-400 font-medium"
                                 )}
                                 style={{
                                     height: itemHeight,

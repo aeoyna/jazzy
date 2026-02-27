@@ -1,4 +1,4 @@
-import { Song, Section, Bar, Chord } from '@/types/song';
+import { Song, Section, Bar } from '@/types/song';
 import { v4 as uuidv4 } from 'uuid';
 
 /**
@@ -60,7 +60,6 @@ export function parseIRealUri(uri: string): Song | null {
 export function parseChordData(data: string): Section[] {
     const sections: Section[] = [];
     let currentSection: Section = { label: 'A', bars: [] };
-    let currentBar: Bar = { chords: [] };
 
     // 1. Clean up outer spaces and specific obscured formats
     let cleanData = data.trim();
@@ -264,7 +263,7 @@ function parseChord(raw: string): string {
     // Handle "n" (no chord / N.C.)
     if (chord === 'n') return 'N.C.';
     if (chord === 'l') return ''; // 'l' is often normal bar line in some formats?
-    if (chord === 'x' || chord === 'r') return ''; // repeats
+    if (chord === 'x' || chord === 'r' || chord === '%' || chord === '%%') return ''; // repeats / simile marks
 
     // Clean brackets
     chord = chord.replace(/[\[\]\{\}\|]/g, '');
@@ -295,7 +294,7 @@ export function songToIRealString(song: Song): string {
             }
 
             if (bar.chords.length === 0) {
-                sectionStr += ' '; // Empty bar
+                sectionStr += '%'; // Empty bar = repeat previous bar
             } else {
                 sectionStr += bar.chords.join(' ');
             }
